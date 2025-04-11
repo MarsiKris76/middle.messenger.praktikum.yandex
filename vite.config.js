@@ -18,6 +18,9 @@ export default defineConfig({
         },
         outDir: resolve(__dirname, 'dist'),
     },
+    server: {
+        port: 3000
+    },
     plugins: [handlebars({
         partialDirectory: resolve(__dirname, 'src/partials'),
     }
