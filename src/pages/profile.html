@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <title>Профиль</title>
+</head>
+<body>
+    <main class="profile">
+        <div class="avatar__form">
+            {{> Avatar alt_text="Картинка профиля" src="../resources/404_image.jpg"}}
+            {{> Button text="Выбрать аватар"}} <!--в дальнейшем нужно будет связать кнопку с инпутом-->
+            <input type="file" name="avatar" accept="image/*" class="avatar__input">
+        </div>
+        <hr class="divider">
+        <form action="/user/password" method="post" class="change_password__form">
+            <div class="change_password__inputs_row">
+                {{> FormInput type="password" name="newPassword" placeholder="Пароль"}}
+                {{> FormInput type="password" name="re-newPassword" placeholder="Повторите пароль"}}
+            </div>
+            <div class="change_password__inputs_row">
+                {{> FormInput type="password" name="oldPassword" placeholder="Старый пароль"}}
+                <div class="change_password__submit">
+                    {{> Button text="Сменить пароль"}}
+                </div>
+            </div>
+        </form>
+        <hr class="divider">
+        <form action="/user/profile" method="post" class="change_profile__form">
+            <div class="change_profile__inputs_row">
+                {{> FormInput type="text" name="login" placeholder="Логин"}}
+                {{> FormInput type="text" name="display_name" placeholder="Отображаемое имя"}}
+            </div>
+            <div class="change_profile__inputs_row">
+                {{> FormInput type="text" name="first_name" placeholder="Имя"}}
+                {{> FormInput type="text" name="second_name" placeholder="Фамилия"}}
+            </div>
+            <div class="change_profile__inputs_row">
+                {{> FormInput type="email" name="email" placeholder="Электронный адрес"}}
+                {{> FormInput type="text" name="phone" placeholder="Телефон"}}
+            </div>
+            <div class="change_profile__submit">
+                {{> Button text="Сохранить"}}
+            </div>
+        </form>
+    </main>
+</body>
+</html>

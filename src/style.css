@@ -1,0 +1,169 @@
+/* Базовые стили */
+:root {
+  --shadow_border: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+  --color_base: #c2d9ff;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #bbbbbb;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+a {
+  font-weight: 500;
+  color: #535bf2;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;  
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+.navbar {
+  top: 0;
+  position: absolute;
+}
+
+.input_base {
+  height: 40px;
+  width: 100%;
+  margin: 10px;
+  border: none;
+  outline: none;
+  color: black;
+  background-color: inherit;
+  border-bottom: 1px solid #000;
+  transition: border-color 0.5s;
+}
+.input_base:focus {
+  border-bottom: 1px solid var(--color_base);
+  box-shadow: 0 1px 0 0 var(--color_base);
+}
+
+.button_base {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.4em 1.1em;
+  margin: 0.2em 0.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--color_base);
+  cursor: pointer;
+  transition: border-color 0.25s, transform 0.1s ease-in-out;
+  box-shadow: var(--shadow_border);
+}
+.button_base:hover {
+  border-color: #000000;
+}
+.button_base:active {
+  transform: scale(0.95);
+}
+
+.avatar_base {
+  position: relative;
+  display: inline-block;
+}
+.avatar_base__image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.image_base {
+  box-shadow: var(--shadow_border);
+}
+
+.profile {
+  height: 600px;
+  min-width: 460px;
+}
+
+/* БЭM стили */
+.login, .registration, .profile, .error404, .error500 {
+  position: absolute;
+  top: 0;
+  width: 33%;
+  margin: 0 33%;
+  box-shadow: var(--shadow_border);
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.login__form, .registration__form, .change_password__form, .change_profile__form, .avatar__form {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+.login__submit, .registration__submit, .change_password__submit, .change_profile__submit {
+  display: flex;
+  justify-content: center;
+  margin: 15px 0 0 0;
+}
+
+.registration__inputs_row, .change_password__inputs_row, .change_profile__inputs_row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.divider {
+  width: 99%;
+  margin: 15px 0;
+  border-color: #fdfdfd;
+}
+
+/* Блок логина */
+.login {
+  height: 290px;
+}
+
+/* Блок регистрации */
+.registration {
+  height: 350px;
+  min-width: 450px;
+}
+
+/* Блок смены пароля */
+.change_password__submit {
+  min-width: 170px;
+  margin: 10px;
+}
+
+/* Блок смены аватара */
+.avatar__form {
+  align-items: center;
+}
+.avatar__input {
+  display: none;
+}

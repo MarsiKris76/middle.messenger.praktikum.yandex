@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../style.css">
+    <title>Войти</title>
+</head>
+<body>
+    <main class="login">
+        <form action="/auth/signin" method="post" class="login__form">
+            <div class="registration__inputs_row">
+                {{> FormInput type="text" name="login" placeholder="Логин"}}
+            </div>
+            <div class="registration__inputs_row">
+                {{> FormInput type="password" name="password" placeholder="Пароль"}}
+            </div>
+
+            <div class="login__submit">
+                {{> Button text="Войти"}}
+            </div>
+        </form>
+        <hr class="divider">
+        <div>
+            {{> Button text="Зарегистрироваться" classes="login__registration_button"}}
+        </div>
+    </main>
+</body>
+</html>
