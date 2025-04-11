@@ -7,17 +7,16 @@
 </head>
 <body>
     <div class="login">
-        <form action="/login" method="post">
-            <div class="login">
-                {{> FormInput type="text" name="login" placeholder="Логин"}}
-                {{> FormInput type="password" name="password" placeholder="Пароль"}}
-            </div>
-            <div>
+        <form action="/auth/signin" method="post" class="login__form">
+            {{> FormInput type="text" name="login" placeholder="Логин"}}
+            {{> FormInput type="password" name="password" placeholder="Пароль"}}
+            <div class="login__submit">
                 {{> Button text="Войти"}}
             </div>
         </form>
+        <hr class="divider">
         <div>
-            {{> Button text="Зарегистрироваться"}}
+            {{> Button text="Зарегистрироваться" classes="login__registration_button"}}
         </div>
     </div>
 </body>

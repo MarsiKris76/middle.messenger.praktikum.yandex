@@ -3,9 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../style.css">
-    <title>Title</title>
+    <title>Регистрация</title>
 </head>
 <body>
-
+    <div class="registration">
+        <form action="/auth/signup" method="post" class="registration__form">
+            <div class="registration__inputs_row">
+                {{> FormInput type="text" name="login" placeholder="Логин"}}
+            </div>
+            <div class="registration__inputs_row">
+                {{> FormInput type="password" name="password" placeholder="Пароль"}}
+                {{> FormInput type="password" name="re-password" placeholder="Повторите пароль"}}
+            </div>
+            <div class="registration__inputs_row">
+                {{> FormInput type="text" name="first_name" placeholder="Имя"}}
+                {{> FormInput type="text" name="second_name" placeholder="Фамилия"}}
+            </div>
+            <div class="registration__inputs_row">
+                {{> FormInput type="email" name="email" placeholder="Электронный адрес"}}
+                {{> FormInput type="text" name="phone" placeholder="Телефон"}}
+            </div>
+            <div class="registration__submit">
+                {{> Button text="Зарегистрироваться"}}
+            </div>
+        </form>
+    </div>
 </body>
 </html>
