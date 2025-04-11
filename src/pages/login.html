@@ -6,10 +6,15 @@
     <title>Войти</title>
 </head>
 <body>
-    <div class="login">
+    <main class="login">
         <form action="/auth/signin" method="post" class="login__form">
-            {{> FormInput type="text" name="login" placeholder="Логин"}}
-            {{> FormInput type="password" name="password" placeholder="Пароль"}}
+            <div class="registration__inputs_row">
+                {{> FormInput type="text" name="login" placeholder="Логин"}}
+            </div>
+            <div class="registration__inputs_row">
+                {{> FormInput type="password" name="password" placeholder="Пароль"}}
+            </div>
+
             <div class="login__submit">
                 {{> Button text="Войти"}}
             </div>
@@ -18,6 +23,6 @@
         <div>
             {{> Button text="Зарегистрироваться" classes="login__registration_button"}}
         </div>
-    </div>
+    </main>
 </body>
 </html>
