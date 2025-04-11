@@ -7,6 +7,5 @@
 
 [build]
   command = "npm run build"
-  command = "ls"
   command = "npm run preview"
   publish = "dist"
