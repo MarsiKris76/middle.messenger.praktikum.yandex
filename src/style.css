@@ -125,6 +125,7 @@ h1 {
   flex-direction: column;
   width: 90%;
 }
+
 .login__submit, .registration__submit, .change_password__submit, .change_profile__submit {
   display: flex;
   justify-content: center;
