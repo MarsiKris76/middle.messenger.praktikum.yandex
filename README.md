@@ -1,5 +1,5 @@
 ## Netlify
-[Cсылка на netlify.](https://67f9ffc88dc75300080a8d01--mess-test.netlify.app/)
+Обновил [ссылку на netlify.](https://67fa7c072683f6000891cda6--mess-test.netlify.app/)
 
 ## PR
 [Ссылка на PR.](https://github.com/MarsiKris76/middle.messenger.praktikum.yandex/pull/7)
