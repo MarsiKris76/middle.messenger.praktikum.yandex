@@ -1,14 +1,17 @@
 /* Базовые стили */
 :root {
   --shadow_border: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
-  --color_base: #c2d9ff;
+  --base_theme_color: #c2d9ff;
+  --base_text_color: rgba(255, 255, 255, 0.87);
+  --base_background_color: #bbbbbb;
+  --base_link_color: #535bf2;
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #bbbbbb;
+  color: var(--base_text_color);
+  background-color: var(--base_background_color);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -25,11 +28,11 @@
 
 a {
   font-weight: 500;
-  color: #535bf2;
+  color: var(--base_link_color);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;  
+  color: var(--base_link_color);
 }
 
 body {
@@ -62,8 +65,8 @@ h1 {
   transition: border-color 0.5s;
 }
 .input_base:focus {
-  border-bottom: 1px solid var(--color_base);
-  box-shadow: 0 1px 0 0 var(--color_base);
+  border-bottom: 1px solid var(--base_theme_color);
+  box-shadow: 0 1px 0 0 var(--base_theme_color);
 }
 
 .button_base {
@@ -74,7 +77,7 @@ h1 {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: var(--color_base);
+  background-color: var(--base_theme_color);
   cursor: pointer;
   transition: border-color 0.25s, transform 0.1s ease-in-out;
   box-shadow: var(--shadow_border);

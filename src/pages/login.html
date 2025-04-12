@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../style.css">
     <title>Войти</title>
 </head>
 <body>
     <main class="login">
         <form action="/auth/signin" method="post" class="login__form">
-            <div class="registration__inputs_row">
+            <section class="registration__inputs_row">
                 {{> FormInput type="text" name="login" placeholder="Логин"}}
-            </div>
-            <div class="registration__inputs_row">
+            </section>
+            <section class="registration__inputs_row">
                 {{> FormInput type="password" name="password" placeholder="Пароль"}}
-            </div>
-
-            <div class="login__submit">
-                {{> Button text="Войти"}}
-            </div>
+            </section>
+            <section class="login__submit">
+                {{> Button type="submit" text="Войти"}}
+            </section>
         </form>
         <hr class="divider">
         <div>
