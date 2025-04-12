@@ -16,5 +16,8 @@
     "lodash-es": "^4.17.21",
     "postcss": "^8.5.3",
     "vite-plugin-handlebars": "^2.0.0"
+  },
+  "engines": {
+    "node": "22.14.0"
   }
 }
