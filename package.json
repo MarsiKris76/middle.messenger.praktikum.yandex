@@ -1,0 +1,23 @@
+{
+  "name": "messenger",
+  "private": false,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview --port 3000",
+    "start": "vite build && vite preview --port 3000"
+  },
+  "devDependencies": {
+    "vite": "^6.2.0"
+  },
+  "dependencies": {
+    "lodash-es": "^4.17.21",
+    "postcss": "^8.5.3",
+    "vite-plugin-handlebars": "^2.0.0"
+  },
+  "engines": {
+    "node": ">=18.0"
+  }
+}
