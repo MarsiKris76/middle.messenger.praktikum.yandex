@@ -1,16 +1,8 @@
-import Block from "../block";
-// Ваш реализованный шаблонизатор
-import { compile } from "../../utils/templator";
-import { template } from "./template";
+import Component from "../../services/Component.js";
+import buttonTpl from "./ButtonTpl.js";
 
-export default class Button extends Block {
-    constructor(props) {
-        // Создаём враппер DOM-элемент button
-        super("button", props);
-    }
-
+export default class Button extends Component {
     render() {
-        const { text } = this.props;
-        return template({ text });
+        return this.compile(buttonTpl)
     }
 }
