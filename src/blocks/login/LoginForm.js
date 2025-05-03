@@ -18,7 +18,7 @@ export default class LoginForm extends Component {
                 'class':'registration__inputs_row'
             }
         });
-        const submitBtn = new Button('asd', {
+        const submitBtn = new Button('section', {
             text: 'Войти',
             attr: {
                 'class':'login__submit'

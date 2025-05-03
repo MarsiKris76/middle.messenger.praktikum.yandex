@@ -5,10 +5,11 @@ import Button from "../components/button/Button.js";
 
 export default class LoginPage extends Component {
     render() {
-        const loginForm = new LoginForm(undefined)
-        const registrationBtn = new Button( undefined, {
+        const loginForm = new LoginForm('', {isFragment: true})
+        const registrationBtn = new Button( '', {
             text: 'Зарегистрироваться',
-            classes: 'login__registration_button'
+            classes: 'login__registration_button',
+            isFragment: true
         });
         return this.compile(loginPageTpl, {
             children: {

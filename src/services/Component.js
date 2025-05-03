@@ -18,9 +18,11 @@ export default class Component {
     _eventBus;
     _props;
     _setUpdate = false;
+    _isFragment = false;
 
     constructor(tagName = "div", propsAndChildren = {}) {
         const { children, props, lists } = this.getChildren(propsAndChildren);
+        this._isFragment = props?.isFragment ?? false;
         this._eventBus = new EventBus();
         this._id = makeID();
         this._meta = {
@@ -42,7 +44,7 @@ export default class Component {
     }
 
     init() {
-        this._element = this.createDocumentElement(this._meta?.tagName);
+        this._element = this.createDocumentElement(this._meta?.tagName, false);
         this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
 
@@ -122,7 +124,7 @@ export default class Component {
         Object.entries(this._lists).forEach(([key]) => {
             propsAndStuds[key] = `<div data-id="_temp_${key}"></div>`;
         });
-        const fragment = this.createDocumentElement('template');
+        const fragment = this.createDocumentElement('template', true);
         fragment.innerHTML = Handlebars.compile(template)(propsAndStuds);
         Object.values(this._children).forEach((child) => {
             const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
@@ -133,7 +135,7 @@ export default class Component {
             const stub = fragment.content.querySelector(`[data-id="_temp_${key}"]`);
             if (!stub)
                 return;
-            const listContent = this.createDocumentElement('template');
+            const listContent = this.createDocumentElement('template', true);
             child.forEach(item => {
                 if (item instanceof Component)
                     listContent.content.append(item.getContent());
@@ -197,7 +199,9 @@ export default class Component {
         return this._element;
     }
 
-    createDocumentElement(tagName) {
+    createDocumentElement(tagName, isTemplate) {
+        if (this._isFragment && !isTemplate)
+            return document.createDocumentFragment();
         const element = document.createElement(tagName);
         if (this._props.settings?.withInternalID)
             element.setAttribute('date-id', this._id)
