@@ -6,37 +6,25 @@ import Button from "../../components/button/Button.js";
 export default class LoginForm extends Component {
 
     render() {
-        const loginInput = new Input('section', {
-            type: 'text', name: 'login', text: 'Логин',
-            attr: {
-                'class':'registration__inputs_row'
-            }
+        const loginInput = new Input('', {
+            type: 'text', name: 'login', placeholder: 'Логин',
+            isFragment: true
         });
-        const passwordInput = new Input('section', {
-            type: 'password', name: 'password', text: 'Пароль',
-            attr: {
-                'class':'registration__inputs_row'
-            }
+        const passwordInput = new Input('', {
+            type: 'password', name: 'password', placeholder: 'Пароль',
+            isFragment: true
         });
-        const submitBtn = new Button('section', {
+        const submitBtn = new Button('', {
             text: 'Войти',
-            attr: {
-                'class':'login__submit'
-            }
+            isFragment: true
         });
 
         return this.compile(loginFormTpl, {
             children: {
                 login: loginInput,
-                password : passwordInput,
-                submitBtn : submitBtn,
-            },
-            attr: {
-                'action':'/auth/signin',
-                'method':'post',
-                'class':'login__form'
-            },
-
+                password: passwordInput,
+                submitBtn: submitBtn
+            }
         })
     }
 }
