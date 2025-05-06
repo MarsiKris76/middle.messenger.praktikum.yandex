@@ -1,3 +1,5 @@
-const registrationPageTpl = `{{{ registrationForm }}}`;
+const registrationPageTpl = `
+    {{{ registrationForm }}}
+`;
 
 export default registrationPageTpl;

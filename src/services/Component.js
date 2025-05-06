@@ -114,10 +114,12 @@ export default class Component {
         if (typeof(props) == "undefined")
             props = this._props;
         else
-            props = { ...this._props, props}
+            props = { ...this._props, ...props};
         const propsAndStuds = { ...props };
-        if (propsAndStuds?.props?.children)
-            this._children = propsAndStuds.props.children;
+        if (propsAndStuds.children)
+            this._children = propsAndStuds.children;
+        if (propsAndStuds.list)
+            this._lists = propsAndStuds.list;
         Object.entries(this._children).forEach(([key, child]) => {
             propsAndStuds[key] = `<div data-id="${child._id}"></div>`;
         });

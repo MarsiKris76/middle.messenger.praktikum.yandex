@@ -25,6 +25,6 @@ export default class LoginForm extends Component {
                 password: passwordInput,
                 submitBtn: submitBtn
             }
-        })
+        });
     }
 }

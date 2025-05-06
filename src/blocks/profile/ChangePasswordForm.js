@@ -30,6 +30,6 @@ export default class ChangePasswordForm extends Component {
                 oldPassword: oldPassword,
                 submitBtn: submitBtn
             }
-        })
+        });
     }
 }

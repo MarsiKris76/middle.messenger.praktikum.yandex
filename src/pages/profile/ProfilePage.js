@@ -31,6 +31,6 @@ export default class ProfilePage extends Component {
                 changePasswordForm: changePasswordForm,
                 changeProfileForm: changeProfileForm
             }
-        })
+        });
     }
 }

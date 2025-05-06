@@ -46,6 +46,6 @@ export default class ChangeProfileForm extends Component {
                 phone: phone,
                 submitBtn: submitBtn
             }
-        })
+        });
     }
 }

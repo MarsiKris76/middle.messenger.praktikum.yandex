@@ -9,6 +9,6 @@ export default class RegistrationPage extends Component {
             children: {
                 registrationForm: registrationForm
             }
-        })
+        });
     }
 }

@@ -4,7 +4,14 @@
   --base_theme_color: #c2d9ff;
   --base_text_color: rgb(255 255 255 / 87%);
   --base_background_color: #bbb;
+  --messenger_background_color: #fff;
   --base_link_color: #535bf2;
+  --chat_item_name_color: #2eb4c9;
+  --chat_item_preview_message_color: #666;
+  --chat_item_hover_color: #f0f4f8;
+  --message_feed_background_color: #f9f9f9;
+  --incoming_message_color: #e3f2fd;
+  --outgoing_message_color: #c8e6c9;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -40,6 +47,7 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px; min-height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
@@ -126,19 +134,19 @@ h1 {
   flex-direction: column;
 }
 
-.login__form, .registration__form, .change_password__form, .change_profile__form, .avatar__form {
+.login__form, .registration__form, .change_password__form, .change_profile__form, .avatar__form, .message-feed__form {
   display: flex;
   flex-direction: column;
   width: 90%;
 }
 
-.login__submit, .registration__submit, .change_password__submit, .change_profile__submit {
+.login__submit, .registration__submit, .change_password__submit, .change_profile__submit, .message-feed__submit {
   display: flex;
   justify-content: center;
   margin: 15px 0 0;
 }
 
-.registration__inputs_row, .change_password__inputs_row, .change_profile__inputs_row {
+.registration__inputs_row, .change_password__inputs_row, .change_profile__inputs_row, .message-feed__inputs_row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -162,7 +170,7 @@ h1 {
 }
 
 /* Блок смены пароля */
-.change_password__submit {
+.change_password__submit, .message-feed__submit{
   min-width: 170px;
   margin: 10px;
 }
@@ -174,4 +182,115 @@ h1 {
 
 .avatar__input {
   display: none;
+}
+
+.messenger {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  border: 1px solid #ccc;
+  box-shadow: var(--shadow_border);
+  background-color: var(--messenger_background_color);
+}
+
+.messenger__chat-list {
+  width: 300px;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
+.messenger__chat-avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.messenger__chat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.messenger__message-feed {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: var(--message_feed_background_color);
+}
+
+.chat-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.chat-item:hover {
+  background-color: var(--chat_item_hover_color);
+}
+
+.chat-item__content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chat-item__text {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.chat-item__name {
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--chat_item_name_color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chat-item__preview {
+  font-size: 13px;
+  color: var(--chat_item_preview_message_color);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.message-feed__message {
+  max-width: 60%;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  word-wrap: break-word;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.message-feed__message--incoming {
+  align-self: flex-start;
+  background-color: var(--incoming_message_color);
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.message-feed__message--outgoing {
+  align-self: flex-end;
+  background-color: var(--outgoing_message_color);
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.message-feed__form {
+  width: 100%;
+}
+
+.message-feed__submit{
+  min-width: 120px;
+  margin: 10px;
 }

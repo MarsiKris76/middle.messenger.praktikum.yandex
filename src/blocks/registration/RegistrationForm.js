@@ -51,6 +51,6 @@ export default class RegistrationForm extends Component {
                 phone: phone,
                 submitBtn : submitBtn,
             }
-        })
+        });
     }
 }

@@ -1,3 +1,7 @@
-const linkTpl = `<a href="{{ url }}">{{ title }}</a>`
+const linkTpl = `
+    <a href="{{url}}">
+        {{ title }}
+    </a>
+`;
 
 export default linkTpl;

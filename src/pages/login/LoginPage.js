@@ -17,6 +17,6 @@ export default class LoginPage extends Component {
                 loginForm: loginForm,
                 registrationBtn: registrationBtn
             }
-        })
+        });
     }
 }

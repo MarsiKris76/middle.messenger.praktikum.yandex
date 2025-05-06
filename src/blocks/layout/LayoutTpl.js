@@ -1,7 +1,7 @@
 const layoutTpl = `
-<main>
-    {{{ content }}}
-</main>
+    <main>
+        {{{ content }}}
+    </main>
 `;
 
 export default layoutTpl;
