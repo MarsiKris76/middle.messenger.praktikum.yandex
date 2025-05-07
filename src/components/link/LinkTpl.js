@@ -1,5 +1,5 @@
 const linkTpl = `
-    <a href="{{url}}">
+    <a href='{{url}}'>
         {{ title }}
     </a>
 `;

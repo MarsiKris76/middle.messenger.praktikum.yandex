@@ -12,6 +12,7 @@
   --message_feed_background_color: #f9f9f9;
   --incoming_message_color: #e3f2fd;
   --outgoing_message_color: #c8e6c9;
+  --error_color: #f00;
 
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -70,6 +71,11 @@ h1 {
   background-color: inherit;
   border-bottom: 1px solid #000;
   transition: border-color 0.5s;
+}
+
+.input_base--error, .input_base.input_base--error:focus {
+  border-color: var(--error_color);
+  border-bottom: 1px solid var(--error_color);
 }
 
 .input_base:focus {
