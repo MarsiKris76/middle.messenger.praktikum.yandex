@@ -1,6 +1,6 @@
-import Component from "../../services/Component.js";
-import chatItemTpl from "./ChatItemTpl.js";
-import Avatar from "../avatar/Avatar.js";
+import Component from "../../services/Component";
+import chatItemTpl from "./ChatItemTpl";
+import Avatar from "../avatar/Avatar";
 
 // нужна будет реализация с передачей параметров
 export default class ChatItem extends Component {

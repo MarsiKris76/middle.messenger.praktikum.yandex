@@ -1,8 +1,8 @@
-import Component from "../../services/Component.js";
-import messengerPageTpl from "./MessengerPageTpl.js";
-import ChatItem from "../../components/chat_item/ChatItem.js";
-import Message from "../../components/message/Message.js";
-import MessageForm from "../../blocks/message_form/MessageForm.js";
+import Component from "../../services/Component";
+import messengerPageTpl from "./MessengerPageTpl";
+import ChatItem from "../../components/chat_item/ChatItem";
+import Message from "../../components/message/Message";
+import MessageForm from "../../blocks/message_form/MessageForm";
 
 export default class MessengerPage extends Component {
     render() {

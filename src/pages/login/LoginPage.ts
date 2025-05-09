@@ -1,7 +1,7 @@
-import loginPageTpl from "./LoginPageTpl.js";
-import Component from "../../services/Component.js";
-import LoginForm from "../../blocks/login/LoginForm.js";
-import Button from "../../components/button/Button.js";
+import loginPageTpl from "./LoginPageTpl";
+import Component from "../../services/Component";
+import LoginForm from "../../blocks/login/LoginForm";
+import Button from "../../components/button/Button";
 
 export default class LoginPage extends Component {
     render() {

@@ -1,5 +1,5 @@
-import layoutTpl from "./LayoutTpl.js";
-import Component from "../../services/Component.js";
+import layoutTpl from "./LayoutTpl";
+import Component from "../../services/Component";
 
 export default class Layout extends Component {
     render() {

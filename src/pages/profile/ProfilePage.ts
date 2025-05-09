@@ -1,10 +1,10 @@
-import Component from "../../services/Component.js";
-import profilePageTpl from "./ProfilePageTpl.js";
-import Avatar from "../../components/avatar/Avatar.js";
-import Button from "../../components/button/Button.js";
-import Input from "../../components/input/Input.js";
-import ChangePasswordForm from "../../blocks/profile/ChangePasswordForm.js";
-import ChangeProfileForm from "../../blocks/profile/ChangeProfileForm.js";
+import Component from "../../services/Component";
+import profilePageTpl from "./ProfilePageTpl";
+import Avatar from "../../components/avatar/Avatar";
+import Button from "../../components/button/Button";
+import Input from "../../components/input/Input";
+import ChangePasswordForm from "../../blocks/profile/ChangePasswordForm";
+import ChangeProfileForm from "../../blocks/profile/ChangeProfileForm";
 
 export default class ProfilePage extends Component {
     render() {

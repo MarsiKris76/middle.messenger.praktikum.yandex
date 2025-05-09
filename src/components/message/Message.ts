@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
-import Component from "../../services/Component.js";
-import messageTpl from "./MessageTpl.js";
+import Component from "../../services/Component";
+import messageTpl from "./MessageTpl";
 
 Handlebars.registerHelper('getMessageDirection', function(isIncoming) {
     return isIncoming ? 'message-feed__message--incoming' : 'message-feed__message--outgoing';

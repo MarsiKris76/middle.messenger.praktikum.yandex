@@ -1,17 +1,20 @@
-import Component from "../../services/Component.js";
-import Input from "../../components/input/Input.js";
-import Button from "../../components/button/Button.js";
-import messageFormTpl from "./MessageFormTpl.js";
+import Component from "../../services/Component";
+import Input from "../../components/input/Input";
+import Button from "../../components/button/Button";
+import messageFormTpl from "./MessageFormTpl";
+import {emptyValidation} from "../../utils/validation";
 
 export default class MessageForm extends Component {
 
     render() {
         const messageInput = new Input('', {
             type: 'text', name: 'message', placeholder: 'Введите своё сообщение...',
+            events: {blur: emptyValidation},
             isFragment: true
         });
         const submitBtn = new Button('', {
             text: 'Отправить',
+            type: 'submit',
             isFragment: true
         });
 

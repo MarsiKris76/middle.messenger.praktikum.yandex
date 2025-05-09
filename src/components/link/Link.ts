@@ -1,5 +1,5 @@
-import Component from "../../services/Component.js";
-import linkTpl from "./LinkTpl.js";
+import Component from "../../services/Component";
+import linkTpl from "./LinkTpl";
 
 export default class Link extends Component {
     render() {

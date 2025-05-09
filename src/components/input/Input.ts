@@ -1,5 +1,5 @@
-import Component from "../../services/Component.js";
-import inputTpl from "./InputTpl.js";
+import Component from "../../services/Component";
+import inputTpl from "./InputTpl";
 
 export default class Input extends Component {
     render() {
@@ -9,7 +9,7 @@ export default class Input extends Component {
     addEvents() {
         const { events = {} } = this._props;
         Object.keys(events).forEach( (eventsName) => {
-            if (this._element.children[0])
+            if (this._element?.children[0])
                 this._element.children[0].addEventListener(eventsName, events[eventsName]);
         });
     }
@@ -17,7 +17,7 @@ export default class Input extends Component {
     removeEvents() {
         const { events = {} } = this._props;
         Object.keys(events).forEach( (eventsName) => {
-            if (this._element.children[0])
+            if (this._element?.children[0])
                 this._element.children[0].removeEventListener(eventsName, events[eventsName]);
         })
     }

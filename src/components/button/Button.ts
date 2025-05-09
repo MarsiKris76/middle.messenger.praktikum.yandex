@@ -1,5 +1,5 @@
-import Component from "../../services/Component.js";
-import buttonTpl from "./ButtonTpl.js";
+import Component from "../../services/Component";
+import buttonTpl from "./ButtonTpl";
 
 export default class Button extends Component {
     render() {

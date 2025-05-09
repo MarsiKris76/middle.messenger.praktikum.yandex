@@ -1,5 +1,5 @@
-import Component from "../../services/Component.js";
-import avatarTpl from "./AvatarTpl.js";
+import Component from "../../services/Component";
+import avatarTpl from "./AvatarTpl";
 
 export default class Avatar extends Component {
     render() {
