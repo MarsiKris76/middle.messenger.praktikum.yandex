@@ -1,18 +1,21 @@
-const METHODS = {
-    GET: 'GET',
-    POST: 'POST',
-    PUT: 'PUT',
-    DELETE: 'DELETE',
+enum METHODS {
+    GET = 'GET',
+    POST = 'POST',
+    PUT = 'PUT',
+    DELETE = 'DELETE'
+}
+
+type Options = {
+    headers?: Record<string, string>;
+    method?: METHODS;
+    timeout?: number;
+    data?: unknown;
 };
 
-// Самая простая версия. Реализовать штучку со всеми проверками им предстоит в конце спринта
-// Необязательный метод
-function queryStringify(data) {
+function queryStringify(data: Record<string, unknown>): string {
     if (typeof data !== 'object') {
-        throw new Error('Data must be object');
+        throw new Error('Должен быть объектом');
     }
-
-    // Здесь достаточно и [object Object] для объекта
     const keys = Object.keys(data);
     return keys.reduce((result, key, index) => {
         return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
@@ -20,28 +23,24 @@ function queryStringify(data) {
 }
 
 class HTTPTransport {
-    get = (url, options = {}) => {
-
+    get = (url: string, options: Omit<Options, 'method'> = {}) => {
         return this.request(url, {...options, method: METHODS.GET}, options.timeout);
     };
-
-    post = (url, options = {}) => {
+    post = (url: string, options: Omit<Options, 'method'> = {}) => {
         return this.request(url, {...options, method: METHODS.POST}, options.timeout);
     };
-
-    put = (url, options = {}) => {
+    put = (url: string, options: Omit<Options, 'method'> = {}) => {
         return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
     };
-
-    delete = (url, options = {}) => {
+    delete = (url: string, options: Omit<Options, 'method'> = {}) => {
         return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
     };
 
-    request = (url, options = {}, timeout = 5000) => {
+    request<T = unknown> (url: string, options: Options, timeout = 5000): Promise<T> {
         const {headers = {}, method, data} = options;
         return new Promise(function(resolve, reject) {
             if (!method) {
-                reject('No method');
+                reject('Нет метода');
                 return;
             }
             const xhr = new XMLHttpRequest();
@@ -49,14 +48,18 @@ class HTTPTransport {
             xhr.open(
                 method,
                 isGet && !!data
-                    ? `${url}${queryStringify(data)}`
+                    ? `${url}${queryStringify(data as Record<string, unknown>)}`
                     : url,
             );
             Object.keys(headers).forEach(key => {
                 xhr.setRequestHeader(key, headers[key]);
             });
-            xhr.onload = function() {
-                resolve(xhr);
+            xhr.onload = () => {
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    resolve(JSON.parse(xhr.response));
+                } else {
+                    reject(xhr.statusText);
+                }
             };
             xhr.onabort = reject;
             xhr.onerror = reject;
@@ -64,8 +67,10 @@ class HTTPTransport {
             xhr.ontimeout = reject;
             if (isGet || !data) {
                 xhr.send();
-            } else {
+            } else if (data instanceof FormData) {
                 xhr.send(data);
+            } else {
+                xhr.send(JSON.stringify(data));
             }
         });
     };

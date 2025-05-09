@@ -44,8 +44,8 @@ nav?.addEventListener('click', e => {
             case 'Мессенджер':
                 renderDOM('#app', messengerPage);
                 break;
-
-
+            default:
+                break;
         }
     }
 
