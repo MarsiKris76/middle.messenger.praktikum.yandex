@@ -1,9 +1,17 @@
 ## Netlify
-[Cсылка на netlify.](https://67f9ffc88dc75300080a8d01--mess-test.netlify.app/)
+Обновил [ссылку на netlify.](https://67fa7c072683f6000891cda6--mess-test.netlify.app/)
 
 ## PR
-[Ссылка на PR.](https://github.com/MarsiKris76/middle.messenger.praktikum.yandex/pull/7)
+[Ссылка на PR.](https://github.com/MarsiKris76/middle.messenger.praktikum.yandex/pull/9)
 
 
 ## Запуск проекта
 Для запуска проекта нужно выполнить команду `npm install` и `npm run start` в корне проекта.
+
+## Применённые технологии
+typescript, eslint, stylelint
+
+## Важно при просмотре работы
+После перехода на каждую страницу кроме страниц ошибок нужно запускать обновление для возврата на навигацию.
+
+Вообще не тестировал класс для создания сетевых запросов т.к. в текущей реализации его ещё некуда применить.
