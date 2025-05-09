@@ -6,10 +6,12 @@ import Input from "../../components/input/Input";
 import ChangePasswordForm from "../../blocks/profile/ChangePasswordForm";
 import ChangeProfileForm from "../../blocks/profile/ChangeProfileForm";
 
+const imagePath = new URL('../../resources/404_image.jpg', import.meta.url).href;
 export default class ProfilePage extends Component {
+
     render() {
         const avatar = new Avatar('', {
-            src: '../resources/404_image.jpg',
+            src: imagePath,
             alt_text: 'Картинка профиля',
             isFragment: true
         });
