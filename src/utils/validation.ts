@@ -1,7 +1,7 @@
 const phoneRegex = /^\+?\d{10,15}$/;
 const emailRegex = /^[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9.-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]+)$/;
 const loginRegex = /^(?=\w*?[a-zA-Z])[\w-]{3,20}$/;
-const nameRegex = /^[A-ZА-Я][a-zа-я]*(?:-[A-ZА-Я][a-zа-я]*)*$/;
+const nameRegex = /^[A-ZА-ЯЁ][a-zа-яё]*(?:-[A-ZА-ЯЁ][a-zа-яё]*)*$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d).{8,40}$/;
 
 const isValidEmail = (email: string) => {

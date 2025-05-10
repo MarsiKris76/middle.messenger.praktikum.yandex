@@ -1,14 +1,11 @@
 export default class EventBus {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-    private listeners: Map<string, Function[]>;
+    private listeners: Map<string, ((...args: unknown[]) => void)[]>;
 
     constructor() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-        this.listeners = new Map<string, Function[]>();
+        this.listeners = new Map<string, ((...args: unknown[]) => void)[]>();
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-    on(event: string, callback: Function): void {
+    on(event: string, callback: (...args: unknown[]) => void): void {
         let eventListeners = this.listeners.get(event);
         if (!eventListeners) {
             eventListeners = [];
@@ -17,8 +14,7 @@ export default class EventBus {
         eventListeners.push(callback);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-    off(event: string, callback: Function): void {
+    off(event: string, callback: (...args: unknown[]) => void): void {
         let eventListeners = this.listeners.get(event);
         if (!eventListeners) {
             throw new Error(`Нет события: ${event}`);
