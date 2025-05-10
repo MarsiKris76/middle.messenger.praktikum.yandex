@@ -5,38 +5,48 @@ enum METHODS {
     DELETE = 'DELETE'
 }
 
-type Options = {
+enum HTTP_STATUS {
+    OK = 200,
+    REDIRECTION = 300,
+    NOT_FOUND = 404,
+    FORBIDDEN = 403,
+    SERVER_ERROR = 500,
+}
+
+type HTTPMethod = <R = unknown>(url: string, options?: Partial<Omit<Options<R>, 'method'>>) => Promise<R>;
+
+type Options<Q> = {
     headers?: Record<string, string>;
     method?: METHODS;
     timeout?: number;
-    data?: unknown;
+    data?: Q;
 };
 
-function queryStringify(data: Record<string, unknown>): string {
+function queryStringify(data: Record<string, string | number | boolean>): string {
     if (typeof data !== 'object') {
         throw new Error('Должен быть объектом');
     }
     const keys = Object.keys(data);
     return keys.reduce((result, key, index) => {
-        return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
+        return `${encodeURIComponent(result)}${encodeURIComponent(key)}=${
+            encodeURIComponent(data[key] ? data[key] : '')}${index < keys.length - 1 ? '&' : ''}`;
     }, '?');
 }
 
 class HTTPTransport {
-    get = (url: string, options: Omit<Options, 'method'> = {}) => {
-        return this.request(url, {...options, method: METHODS.GET}, options.timeout);
-    };
-    post = (url: string, options: Omit<Options, 'method'> = {}) => {
-        return this.request(url, {...options, method: METHODS.POST}, options.timeout);
-    };
-    put = (url: string, options: Omit<Options, 'method'> = {}) => {
-        return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
-    };
-    delete = (url: string, options: Omit<Options, 'method'> = {}) => {
-        return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
-    };
+    private createMethod(method: METHODS): HTTPMethod {
+        return (url, options = {}) => this.request(url, { ...options, method });
+    }
 
-    request<T = unknown> (url: string, options: Options, timeout = 5000): Promise<T> {
+    get = this.createMethod(METHODS.GET);
+
+    post = this.createMethod(METHODS.POST);
+
+    put = this.createMethod(METHODS.PUT);
+
+    delete =this.createMethod(METHODS.DELETE);
+
+    private request<T>(url: string, options: Options<T>, timeout = 5000): Promise<T> {
         const {headers = {}, method, data} = options;
         return new Promise(function(resolve, reject) {
             if (!method) {
@@ -48,14 +58,14 @@ class HTTPTransport {
             xhr.open(
                 method,
                 isGet && !!data
-                    ? `${url}${queryStringify(data as Record<string, unknown>)}`
+                    ? `${url}${queryStringify(data as Record<string, string | number | boolean>)}`
                     : url,
             );
             Object.keys(headers).forEach(key => {
                 xhr.setRequestHeader(key, headers[key]);
             });
             xhr.onload = () => {
-                if (xhr.status >= 200 && xhr.status < 300) {
+                if (xhr.status >= HTTP_STATUS.OK && xhr.status < HTTP_STATUS.REDIRECTION) {
                     resolve(JSON.parse(xhr.response));
                 } else {
                     reject(xhr.statusText);

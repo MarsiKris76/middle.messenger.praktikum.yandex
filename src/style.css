@@ -95,26 +95,26 @@ h1 {
   cursor: pointer;
   transition: border-color 0.25s, transform 0.1s ease-in-out;
   box-shadow: var(--shadow_border);
-}
 
-.button_base:hover {
-  border-color: #000;
-}
+  &:hover {
+    border-color: #000;
+  }
 
-.button_base:active {
-  transform: scale(0.95);
+  &:active {
+    transform: scale(0.95);
+  }
 }
 
 .avatar_base {
   position: relative;
   display: inline-block;
-}
 
-.avatar_base__image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
+  &__image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 }
 
 .image_base {
@@ -197,36 +197,36 @@ h1 {
   border: 1px solid #ccc;
   box-shadow: var(--shadow_border);
   background-color: var(--messenger_background_color);
-}
 
-.messenger__chat-list {
-  width: 300px;
-  border-right: 1px solid #ddd;
-  overflow-y: auto;
-}
+  &__chat-list {
+    width: 300px;
+    border-right: 1px solid #ddd;
+    overflow-y: auto;
+  }
 
-.messenger__chat-avatar {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
+  &__chat-avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
 
-.messenger__chat-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
+  &__chat-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
 
-.messenger__message-feed {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 20px;
-  overflow-y: auto;
-  background-color: var(--message_feed_background_color);
+  &__message-feed {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: var(--message_feed_background_color);
+  }
 }
 
 .chat-item {
@@ -234,38 +234,38 @@ h1 {
   border-bottom: 1px solid #eee;
   cursor: pointer;
   transition: background-color 0.2s ease;
-}
 
-.chat-item:hover {
-  background-color: var(--chat_item_hover_color);
-}
+  &:hover {
+    background-color: var(--chat_item_hover_color);
+  }
 
-.chat-item__content {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
 
-.chat-item__text {
-  flex-grow: 1;
-  overflow: hidden;
-}
+  &__text {
+    flex-grow: 1;
+    overflow: hidden;
+  }
 
-.chat-item__name {
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--chat_item_name_color);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
+  &__name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--chat_item_name_color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-.chat-item__preview {
-  font-size: 13px;
-  color: var(--chat_item_preview_message_color);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  &__preview {
+    font-size: 13px;
+    color: var(--chat_item_preview_message_color);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }
 
 .message-feed__message {
@@ -276,27 +276,29 @@ h1 {
   word-wrap: break-word;
   font-size: 15px;
   line-height: 1.4;
+
+  &--incoming {
+    align-self: flex-start;
+    background-color: var(--incoming_message_color);
+    margin-left: 0;
+    margin-right: auto;
+  }
+
+  &--outgoing {
+    align-self: flex-end;
+    background-color: var(--outgoing_message_color);
+    margin-left: auto;
+    margin-right: 0;
+  }
 }
 
-.message-feed__message--incoming {
-  align-self: flex-start;
-  background-color: var(--incoming_message_color);
-  margin-left: 0;
-  margin-right: auto;
-}
+.message-feed {
+  &__form {
+    width: 100%;
+  }
 
-.message-feed__message--outgoing {
-  align-self: flex-end;
-  background-color: var(--outgoing_message_color);
-  margin-left: auto;
-  margin-right: 0;
-}
-
-.message-feed__form {
-  width: 100%;
-}
-
-.message-feed__submit{
-  min-width: 120px;
-  margin: 10px;
+  &__submit{
+    min-width: 120px;
+    margin: 10px;
+  }
 }

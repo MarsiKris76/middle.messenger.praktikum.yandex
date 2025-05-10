@@ -1,13 +1,10 @@
 export default class EventBus {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     private listeners: Map<string, Function[]>;
 
     constructor() {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
         this.listeners = new Map<string, Function[]>();
     };
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     on(event: string, callback: Function): void {
         let eventListeners = this.listeners.get(event);
         if (!eventListeners) {
@@ -17,7 +14,6 @@ export default class EventBus {
         eventListeners.push(callback);
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
     off(event: string, callback: Function): void {
         let eventListeners = this.listeners.get(event);
         if (!eventListeners) {

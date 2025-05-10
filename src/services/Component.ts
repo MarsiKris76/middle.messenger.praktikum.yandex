@@ -5,11 +5,11 @@ import Handlebars from "handlebars";
 type InnerElement = HTMLElement | DocumentFragment;
 
 interface Children {
-    [key: string]: Component;
+    [key: string]: Component<ComponentProps>;
 }
 
 interface ChildrenLists {
-    [key: string]: Component[];
+    [key: string]: Component<ComponentProps>[];
 }
 
 interface ComponentProps {
@@ -20,13 +20,13 @@ interface ComponentProps {
     attr?: Record<string, string>;
 }
 
-export default abstract class Component {
+export default abstract class Component<Props extends ComponentProps = ComponentProps>{
     static EVENTS = {
-        INIT: "init",
-        FLOW_CDM: "flow:component-did-mount",
-        FLOW_CDU: "flow:component-did-update",
-        FLOW_RENDER: "flow:render"
-    };
+        INIT: 'init',
+        FLOW_CDM: 'flow:component-did-mount',
+        FLOW_CDU: 'flow:component-did-update',
+        FLOW_RENDER: 'flow:render'
+    } as const;
 
     _id: string;
     _tagName: string;
@@ -34,18 +34,18 @@ export default abstract class Component {
     _children: Children;
     _lists: ChildrenLists;
     _eventBus: EventBus;
-    _props: ComponentProps;
+    _props: Props;
     _setUpdate: boolean = false;
     _isFragment: boolean = false;
 
-    constructor(tagName: string = "div", propsAndChildren: ComponentProps = {}) {
+    constructor(tagName: string = 'div', propsAndChildren: Props) {
         const { children, props, lists } = this.getChildren(propsAndChildren);
         this._eventBus = new EventBus();
         this._id = makeID();
         this._tagName = tagName;
         this._children = this._makePropsProxy(children, this);
         this._lists = this._makePropsProxy(lists, this);
-        this._props = this._makePropsProxy({...props, __id: this._id}, this);
+        this._props = this._makePropsProxy({...props as Props, __id: this._id}, this);
         this._isFragment = typeof this._props?.isFragment === 'boolean' ? this._props.isFragment : false;
         this.registerEvents();
         this._eventBus.emit(Component.EVENTS.INIT);
@@ -63,7 +63,7 @@ export default abstract class Component {
         this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
 
-    _componentDidMount() {
+    private _componentDidMount() {
         this.componentDidMount();
         Object.values(this._children).forEach(child => { child.dispatchComponentDidMount() });
     }
@@ -76,7 +76,7 @@ export default abstract class Component {
             this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
     }
 
-    _componentDidUpdate(oldProps: unknown, newProps: unknown) {
+    private _componentDidUpdate(oldProps: unknown, newProps: unknown) {
         const isReRender = this.componentDidUpdate(oldProps, newProps);
         if (isReRender)
             this._eventBus.emit(Component.EVENTS.FLOW_RENDER);
@@ -102,11 +102,11 @@ export default abstract class Component {
         }
     };
 
-    _makePropsProxy<T extends object>(props: T, current: Component): T {
+    private _makePropsProxy<T extends object>(props: T, current: Component<ComponentProps>): T {
         return new Proxy<T>(props, {
             get(target, prop) {
                 const value = Reflect.get(target, prop);
-                return typeof value === "function" ? value.bind(target) : value;
+                return typeof value === 'function' ? value.bind(target) : value;
             },
             set(target, prop, value) {
                 const oldValue = Reflect.get(target, prop);
@@ -117,7 +117,7 @@ export default abstract class Component {
                 return true;
             },
             deleteProperty() {
-                throw new Error("Нет доступа");
+                throw new Error('Нет доступа');
             }
         });
     }
@@ -127,7 +127,7 @@ export default abstract class Component {
     }
 
     compile(template: string, props?: ComponentProps): InnerElement {
-        if (typeof(props) == "undefined")
+        if (typeof(props) == 'undefined')
             props = this._props;
         else
             props = { ...this._props, ...props};
@@ -163,7 +163,7 @@ export default abstract class Component {
         return fragment.content;
     }
 
-    _render() {
+    private _render() {
         const block = this.render();
         if (this._element instanceof HTMLElement) {
             this.removeEvents();
