@@ -1,11 +1,11 @@
 export default class EventBus {
-    private listeners: Map<string, Function[]>;
+    private listeners: Map<string, ((...args: unknown[]) => void)[]>;
 
     constructor() {
-        this.listeners = new Map<string, Function[]>();
+        this.listeners = new Map<string, ((...args: unknown[]) => void)[]>();
     };
 
-    on(event: string, callback: Function): void {
+    on(event: string, callback: (...args: unknown[]) => void): void {
         let eventListeners = this.listeners.get(event);
         if (!eventListeners) {
             eventListeners = [];
@@ -14,7 +14,7 @@ export default class EventBus {
         eventListeners.push(callback);
     }
 
-    off(event: string, callback: Function): void {
+    off(event: string, callback: (...args: unknown[]) => void): void {
         let eventListeners = this.listeners.get(event);
         if (!eventListeners) {
             throw new Error(`Нет события: ${event}`);
