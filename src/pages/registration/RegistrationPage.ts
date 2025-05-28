@@ -4,7 +4,7 @@ import RegistrationForm from "../../blocks/registration/RegistrationForm";
 
 export default class RegistrationPage extends Component {
     render() {
-        const registrationForm = new RegistrationForm('', {isFragment: true})
+        const registrationForm = new RegistrationForm('', {isFragment: true});
         return this.compile(registrationPageTpl, {
             children: {
                 registrationForm: registrationForm

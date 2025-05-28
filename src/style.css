@@ -27,6 +27,7 @@
 }
 
 #app {
+  display: contents;
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -300,5 +301,18 @@ h1 {
   &__submit{
     min-width: 120px;
     margin: 10px;
+  }
+}
+
+.sidebar {
+  padding: 0 3px;
+  border-right: 1px solid #ddd;
+
+  &__icon svg{
+    color: var(--base_theme_color);
+    width: 34px;
+    height: 34px;
+    margin-top: 10px;
+    cursor: pointer;
   }
 }

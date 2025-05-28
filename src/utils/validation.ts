@@ -27,10 +27,10 @@ export function loginValidation(event: Event) {
     const input = event.target;
     if (input instanceof HTMLInputElement) {
         if (isValidLogin(input.value)) {
-            input.classList.remove("input_base--error");
+            input.classList.remove('input_base--error');
             return;
         }
-        input.classList.add("input_base--error");
+        input.classList.add('input_base--error');
     }
 }
 
@@ -38,10 +38,10 @@ export function passwordValidation(event: Event) {
     const input = event.target;
     if (input instanceof HTMLInputElement) {
         if (isValidPassword(input.value)) {
-            input.classList.remove("input_base--error");
+            input.classList.remove('input_base--error');
             return;
         }
-        input.classList.add("input_base--error");
+        input.classList.add('input_base--error');
     }
 }
 
@@ -49,10 +49,10 @@ export function emptyValidation(event: Event) {
     const input = event.target;
     if (input instanceof HTMLInputElement) {
         if (isNonEmpty(input.value)) {
-            input.classList.remove("input_base--error");
+            input.classList.remove('input_base--error');
             return;
         }
-        input.classList.add("input_base--error");
+        input.classList.add('input_base--error');
     }
 }
 
@@ -60,10 +60,10 @@ export function emailValidation(event: Event) {
     const input = event.target;
     if (input instanceof HTMLInputElement) {
         if (isValidEmail(input.value)) {
-            input.classList.remove("input_base--error");
+            input.classList.remove('input_base--error');
             return;
         }
-        input.classList.add("input_base--error");
+        input.classList.add('input_base--error');
     }
 }
 
@@ -71,10 +71,10 @@ export function nameValidation(event: Event) {
     const input = event.target;
     if (input instanceof HTMLInputElement) {
         if (isValidName(input.value)) {
-            input.classList.remove("input_base--error");
+            input.classList.remove('input_base--error');
             return;
         }
-        input.classList.add("input_base--error");
+        input.classList.add('input_base--error');
     }
 }
 
@@ -82,9 +82,9 @@ export function phoneValidation(event: Event) {
     const input = event.target;
     if (input instanceof HTMLInputElement) {
         if (isValidPhone(input.value)) {
-            input.classList.remove("input_base--error");
+            input.classList.remove('input_base--error');
             return;
         }
-        input.classList.add("input_base--error");
+        input.classList.add('input_base--error');
     }
 }

@@ -1,4 +1,5 @@
 const messengerPageTpl = `
+    {{{toolPanel}}}
     <div class='messenger__chat-list'>
         {{{chatItems}}}
     </div>

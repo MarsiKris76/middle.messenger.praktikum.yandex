@@ -1,69 +1,54 @@
 import './style.css'
-import renderDOM from "./utils/renderDOM";
+import Router from "./services/Router";
 import LoginPage from "./pages/login/LoginPage";
 import RegistrationPage from "./pages/registration/RegistrationPage";
 import ProfilePage from "./pages/profile/ProfilePage";
 import MessengerPage from "./pages/messenger/MessengerPage";
+import Error_404 from "./pages/error_404/Error_404";
+import Error_500 from "./pages/error_500/Error_500";
 
-const loginPage = new LoginPage('main', {
-    attr: {
-        'class':'login'
-    }
-});
-const registrationPage = new RegistrationPage('main',{
-    attr: {
-        'class':'registration'
-    }
-});
-const profilePage = new ProfilePage('main',{
-    attr: {
-        'class':'profile'
-    }
-});
-const messengerPage = new MessengerPage('main',{
-    attr: {
-        'class':'messenger'
-    }
-});
-const nav = document.getElementById('navbar')
-nav?.addEventListener('click', e => {
-    const target = e.target;
-    nav.style.display = "none";
-    if (target instanceof HTMLElement && 'text' in target) {
-        console.log(target.text)
-        switch (target.text) {
-            case 'Вход':
-                renderDOM('#app', loginPage);
-                break;
-            case 'Регистрация':
-                renderDOM('#app', registrationPage);
-                break;
-            case 'Профиль':
-                renderDOM('#app', profilePage);
-                break;
-            case 'Мессенджер':
-                renderDOM('#app', messengerPage);
-                break;
-            default:
-                break;
+
+Router
+    .use('/', 'Вход', LoginPage, 'main', {
+        attr: {
+            'class':'login'
         }
-    }
+    })
+    .use('/settings', 'Профиль', ProfilePage, 'main', {
+        attr: {
+            'class':'profile'
+        }
+    })
+    .use('/messenger', 'Чаты', MessengerPage, 'main',{
+        attr: {
+            'class':'messenger'
+        }
+    })
+    .use('/sign-up', 'Регистрация', RegistrationPage, 'main',{
+        attr: {
+            'class':'registration'
+        }
+    })
+    .use('/404', 'Страница не найдена', Error_404, 'main',{
+        attr: {
+            'class':'error404'
+        }
+    })
+    .use('/500', 'Ошибка', Error_500, 'main',{
+        attr: {
+            'class':'error500'
+        }
+    })
+    .start();
 
-})
-
-document.querySelector('body')?.addEventListener('submit', function (event: SubmitEvent) {
-    event.preventDefault();
-    if (!(event.target instanceof HTMLFormElement)) {
-        return;
-    }
-    const form = event.target;
-    const inputs = form.querySelectorAll('input');
-    inputs.forEach(input => {
-        const blurEvent = new Event('blur');
-        input.dispatchEvent(blurEvent);
-    });
-    const formData = new FormData(form);
-    for (const [key, value] of formData.entries()) {
-        console.log(`${key}: ${value}`);
+document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement;
+    const link = target.closest('a');
+    if (link) {
+        event.preventDefault();
+        const href = link.getAttribute('href');
+        if (href) {
+            Router.go(href);
+        }
     }
 });
