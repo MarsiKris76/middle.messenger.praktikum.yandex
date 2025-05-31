@@ -88,3 +88,14 @@ export function phoneValidation(event: Event) {
         input.classList.add('input_base--error');
     }
 }
+
+export function checkForm(form: HTMLFormElement): boolean {
+    const inputs = form.querySelectorAll('input');
+    const blurEvent = new Event('blur');
+    inputs.forEach(input => {
+        input.dispatchEvent(blurEvent);
+    });
+    return Array.from(inputs).some(input => {
+        return input.classList.contains('input_base--error');
+    });
+}

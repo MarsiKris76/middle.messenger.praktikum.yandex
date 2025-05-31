@@ -7,7 +7,6 @@ import MessengerPage from "./pages/messenger/MessengerPage";
 import Error_404 from "./pages/error_404/Error_404";
 import Error_500 from "./pages/error_500/Error_500";
 
-
 Router
     .use('/', 'Вход', LoginPage, 'main', {
         attr: {

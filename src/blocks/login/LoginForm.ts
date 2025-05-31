@@ -2,7 +2,7 @@ import Component from "../../services/Component";
 import loginFormTpl from "./LoginFormTpl";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import {loginValidation, passwordValidation} from "../../utils/validation";
+import {loginValidation, passwordValidation} from "../../utils/Validation";
 
 export default class LoginForm extends Component {
     render() {

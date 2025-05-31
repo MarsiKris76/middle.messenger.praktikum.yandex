@@ -2,7 +2,7 @@ import changeProfileFormTpl from "./ChangeProfileFormTpl";
 import Component from "../../services/Component";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
-import {emailValidation, loginValidation, nameValidation, phoneValidation} from "../../utils/validation";
+import {emailValidation, loginValidation, nameValidation, phoneValidation} from "../../utils/Validation";
 
 
 export default class ChangeProfileForm extends Component {
