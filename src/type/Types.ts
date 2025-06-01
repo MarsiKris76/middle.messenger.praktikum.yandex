@@ -1,4 +1,4 @@
-export type LoginResponse = {
+export type SimpleResponse = {
     response?: string;
 };
 
@@ -31,3 +31,21 @@ export type UserResponse = {
     "avatar": string,
     "email": string
 };
+
+export type SearchUsersRequest = {
+    login: string
+};
+
+export type ChangeUserRequest = {
+    first_name: string,
+    second_name: string,
+    display_name: string,
+    login: string,
+    email: string,
+    phone: string
+}
+
+export type ChangePasswordRequest = {
+    oldPassword: string,
+    newPassword: string
+}
