@@ -18,7 +18,10 @@ export default class LoginPage extends Component {
                     const form = event.target as HTMLFormElement;
                     if (checkForm(form)) return; // если есть ошибки валидации, то дальше не продолжаем.
                     const data = Object.fromEntries(new FormData(form));
-                    LoginAPI.login(data as LoginRequest).then(r => console.log(r));
+                    LoginAPI.login(data as LoginRequest).then(r => {
+                        console.log(r)
+                        LoginAPI.getUser().then(r => console.log(r));
+                    });
                 }
             }
         });

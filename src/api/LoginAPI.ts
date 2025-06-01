@@ -1,5 +1,5 @@
 import { BaseAPI } from "./BaseAPI";
-import {LoginRequest, LoginResponse, SignUpRequest, SignUpResponse} from "../type/Types";
+import {LoginRequest, LoginResponse, SignUpRequest, SignUpResponse, UserResponse} from "../type/Types";
 
 class LoginAPI extends BaseAPI {
     private static __instance: LoginAPI;
@@ -24,8 +24,12 @@ class LoginAPI extends BaseAPI {
         return await this.create<SignUpRequest, SignUpResponse>(data);
     }
 
-    public async signup(data: SignUpRequest) {
-        return await this.create<SignUpRequest, SignUpResponse>(data);
+    public async getUser() {
+        return await this.http.get<UserResponse>('/user', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     //логинимся
