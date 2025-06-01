@@ -1,5 +1,5 @@
 import HTTP from 'modules/http';
-import {BaseAPI} from "./BaseAPI.ts";
+import {BaseAPI} from "../BaseAPI.ts";
 
 const chatAPIInstance = new HTTP('api/v1/chats');
 

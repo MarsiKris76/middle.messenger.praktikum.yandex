@@ -3,6 +3,7 @@ import Component from "../../services/Component";
 import ProfileIcon from "../../components/icons/ProfileIcon";
 import ExitIcon from "../../components/icons/ExitIcon";
 import Router from "../../services/Router";
+import LoginAPI from "../../api/LoginAPI";
 
 export default class ToolPanel extends Component {
     render() {
@@ -22,7 +23,13 @@ export default class ToolPanel extends Component {
                 click: (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    Router.go('/');
+                    LoginAPI.logout().then((r) => {
+                        if (r as string === 'OK') {
+                            localStorage.removeItem('isAuthenticated');
+                            localStorage.removeItem('user');
+                            Router.go('/')
+                        }
+                    });
                 }
             }
         });

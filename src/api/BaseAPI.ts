@@ -7,11 +7,4 @@ export abstract class BaseAPI {
         this.http = new HTTPTransport(endpoint);
     }
 
-    protected abstract create<R, Q>(data: Q): Promise<R>;
-
-    protected abstract request<Q, R>(data: Q): Promise<R>;
-
-    protected abstract update<Q, R>(data: Q): Promise<R>;
-
-    protected abstract delete<Q, R>(data: Q): Promise<R>;
 }

@@ -19,8 +19,15 @@ export default class LoginPage extends Component {
                     if (checkForm(form)) return; // если есть ошибки валидации, то дальше не продолжаем.
                     const data = Object.fromEntries(new FormData(form));
                     LoginAPI.login(data as LoginRequest).then(r => {
-                        console.log(r)
-                        LoginAPI.getUser().then(r => console.log(r));
+                        if (r as string === 'OK') {
+                            localStorage.setItem('isAuthenticated', 'true');
+                            LoginAPI.getUser().then((u) => {
+                                localStorage.setItem('user', JSON.stringify(u));
+                                Router.go('/messenger');
+                            });
+                        }
+                    }).catch(() => {
+                        alert('Проверьте логин или пароль.');
                     });
                 }
             }

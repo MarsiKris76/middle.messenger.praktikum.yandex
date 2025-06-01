@@ -13,15 +13,29 @@ class LoginAPI extends BaseAPI {
     }
 
     public async login(data: LoginRequest) {
-        return await this.request<LoginRequest, LoginResponse>(data);
+        return await this.http.post<LoginResponse>('/signin', {
+            data: data,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     public async logout() {
-        return await this.delete<LoginResponse>();
+        return await this.http.post<LoginResponse>('/logout', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     public async signup(data: SignUpRequest) {
-        return await this.create<SignUpRequest, SignUpResponse>(data);
+        return await this.http.post<SignUpResponse>('/signup', {
+            data: data,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
 
     public async getUser() {
@@ -31,36 +45,9 @@ class LoginAPI extends BaseAPI {
             }
         });
     }
-
-    //логинимся
-    protected override async request<Q, R>(data: Q): Promise<R>{
-        return await this.http.post<R>('/signin', {
-            data: data,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-    }
-    //выходим
-    protected override async delete<R>(): Promise<R>{
-        return await this.http.post<R>('/logout', {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-    }
-    //регистрируемся
-    protected override async create<Q, R>(data: Q): Promise<R>{
-        return await this.http.post<R>('/signup', {
-            data: data,
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-    }
-    //получить профиль
-    protected override async update<R>(): Promise<R>{
-        return await this.http.put<R>('/signup', {})
+    // Проверка логина
+    public isAuthenticated() {
+        return localStorage.getItem('isAuthenticated') === 'true';
     }
 
     public static getInstance(): LoginAPI {

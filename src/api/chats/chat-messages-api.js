@@ -1,6 +1,6 @@
 // chat-messages-api.js
 import HTTP from 'modules/http';
-import {BaseAPI} from "./BaseAPI.ts";
+import {BaseAPI} from "../BaseAPI.ts";
 
 const chatMessagesAPIInstance = new HTTP('api/v1/messages');
 
