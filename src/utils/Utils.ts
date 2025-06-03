@@ -1,3 +1,18 @@
+export function isObject(value: unknown): value is Record<string, unknown> {
+    return typeof value === 'object' && value !== null;
+}
+
+/*
+Возвращает строковое значение или пустую строку если свойства у переданного объекта нет.
+ */
+export function getProp(key: string, obj: unknown): string {
+    if (!isObject(obj)) {
+        return '';
+    }
+    const value = obj[key];
+    return typeof value === 'string' ? value : '';
+}
+
 // function trim(str: string, rule?: string): string {
 //     str = str.trim();
 //     if (rule) {
@@ -47,9 +62,6 @@
 //     return merge(object as Indexed, result);
 // }
 //
-// function isObject(value: unknown): value is object {
-//     return value !== null && typeof value === 'object';
-// }
 //
 // function isEqual(a: object, b: object): boolean {
 //     if (a.constructor !== b.constructor) {

@@ -97,7 +97,7 @@ export default abstract class Component<Props extends ComponentProps = Component
         if (Object.values(props).length)
             Object.assign(this._props, props);
         if (this._setUpdate) {
-            this._eventBus.emit(Component.EVENTS.FLOW_CDM, oldValues, this._props);
+            this._eventBus.emit(Component.EVENTS.FLOW_CDU, oldValues, this._props);
             this._setUpdate = false;
         }
     };

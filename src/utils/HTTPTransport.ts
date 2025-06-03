@@ -78,7 +78,7 @@ export default class HTTPTransport {
             }
             xhr.open(method, fullUrl);
             xhr.withCredentials = true;
-            if (headers) {
+            if (headers && !(data instanceof FormData)) {
                 Object.entries(headers).forEach(([key, value]) => {
                     xhr.setRequestHeader(key, value);
                 });
