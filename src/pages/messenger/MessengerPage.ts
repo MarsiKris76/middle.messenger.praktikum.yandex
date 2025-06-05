@@ -4,6 +4,7 @@ import ChatItem from "../../components/chat_item/ChatItem";
 import Message from "../../components/message/Message";
 import MessageForm from "../../blocks/message_form/MessageForm";
 import ToolPanel from "../../blocks/tool_panel/ToolPanel";
+import ChatAPI from "../../api/ChatAPI";
 
 export default class MessengerPage extends Component {
     render() {
@@ -16,7 +17,7 @@ export default class MessengerPage extends Component {
         const messages = [message1, message2, message3];
         const chatItems = [chatItem1, chatItem2, chatItem3];
         const messageForm = new MessageForm('', {isFragment: true});
-
+        ChatAPI.getChats({})
         const toolPanel = new ToolPanel('div', {
             attr: {
                 'class':'sidebar'

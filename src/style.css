@@ -236,7 +236,7 @@ h1 {
   cursor: pointer;
   transition: background-color 0.2s ease;
 
-  &:hover {
+  &:hover, &--active {
     background-color: var(--chat_item_hover_color);
   }
 

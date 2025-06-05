@@ -9,12 +9,13 @@ import {checkForm} from "../../utils/Validation";
 import {ChangePasswordRequest, ChangeUserRequest} from "../../type/Types";
 import UserAPI from "../../api/UserAPI";
 import {getProp} from "../../utils/Utils";
+import Store from "../../services/Store";
 
 const imagePath = new URL('../../resources/404_image.jpg', import.meta.url).href;
 export default class ProfilePage extends Component {
 
     render() {
-        const storedProfile = localStorage.getItem('user');
+        const storedProfile = Store.getUser();
         const profile = storedProfile ? JSON.parse(storedProfile) : null;
         const avatarLink = getProp('avatar', profile);
         const avatar = new Avatar('div', {
@@ -44,8 +45,8 @@ export default class ProfilePage extends Component {
                     const formData = new FormData();
                     formData.append('avatar', file);
                     UserAPI.changeUserAvatar(formData).then(u => {
-                        localStorage.setItem('user', JSON.stringify(u));
-                        const storedProfile = localStorage.getItem('user');
+                        Store.saveUser(JSON.stringify(u));
+                        const storedProfile = Store.getUser();
                         const profile = storedProfile ? JSON.parse(storedProfile) : null;
                         const avatarLink = getProp('avatar', profile);
                         avatar.setProps({src: avatarLink === '' ? imagePath : 'https://ya-praktikum.tech/api/v2/resources/' + avatarLink});
@@ -82,7 +83,7 @@ export default class ProfilePage extends Component {
                     if (checkForm(form)) return; // если есть ошибки валидации, то дальше не продолжаем.
                     const data = Object.fromEntries(new FormData(form));
                     UserAPI.changeUserProfile(data as ChangeUserRequest).then(u => {
-                        localStorage.setItem('user', JSON.stringify(u));
+                        Store.saveUser(JSON.stringify(u));
                         alert('Профиль успешно изменён.');
                     }).catch(() => {
                         alert('Проверьте данные.');

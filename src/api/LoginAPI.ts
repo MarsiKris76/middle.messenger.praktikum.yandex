@@ -45,10 +45,6 @@ class LoginAPI extends BaseAPI {
             }
         });
     }
-    // Проверка логина
-    public isAuthenticated() {
-        return localStorage.getItem('isAuthenticated') === 'true';
-    }
 
     public static getInstance(): LoginAPI {
         if (!LoginAPI.__instance) {

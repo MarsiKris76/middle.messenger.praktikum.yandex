@@ -6,6 +6,7 @@ import Router from "../../services/Router";
 import LoginAPI from "../../api/LoginAPI";
 import {LoginRequest} from "../../type/Types";
 import {checkForm} from "../../utils/Validation";
+import Store from "../../services/Store";
 
 export default class LoginPage extends Component {
     render() {
@@ -20,9 +21,9 @@ export default class LoginPage extends Component {
                     const data = Object.fromEntries(new FormData(form));
                     LoginAPI.login(data as LoginRequest).then(r => {
                         if (r as string === 'OK') {
-                            localStorage.setItem('isAuthenticated', 'true');
+                            Store.setAuthenticate()
                             LoginAPI.getUser().then((u) => {
-                                localStorage.setItem('user', JSON.stringify(u));
+                                Store.saveUser(JSON.stringify(u));
                                 Router.go('/messenger');
                             });
                         }

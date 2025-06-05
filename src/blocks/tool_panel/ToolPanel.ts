@@ -2,8 +2,12 @@ import toolPanelTpl from "./ToolPanelTpl";
 import Component from "../../services/Component";
 import ProfileIcon from "../../components/icons/ProfileIcon";
 import ExitIcon from "../../components/icons/ExitIcon";
+import AddChatIcon from "../../components/icons/AddChat";
 import Router from "../../services/Router";
 import LoginAPI from "../../api/LoginAPI";
+import ChatAPI from "../../api/ChatAPI";
+import {CreateChatRequest} from "../../type/Types";
+import Store from "../../services/Store";
 
 export default class ToolPanel extends Component {
     render() {
@@ -17,6 +21,18 @@ export default class ToolPanel extends Component {
                 }
             }
         });
+        const addChatIcon = new AddChatIcon('', {
+            isFragment: true,
+            events: {
+                click: (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    ChatAPI.createChat({title: 'Новый чат'} as CreateChatRequest).then((result) => {
+                        console.log(result);
+                    });
+                }
+            }
+        });
         const exitIcon = new ExitIcon('', {
             isFragment: true,
             events: {
@@ -25,8 +41,8 @@ export default class ToolPanel extends Component {
                     event.stopPropagation();
                     LoginAPI.logout().then((r) => {
                         if (r as string === 'OK') {
-                            localStorage.removeItem('isAuthenticated');
-                            localStorage.removeItem('user');
+                            Store.removeAuthenticate();
+                            Store.removeUser();
                             Router.go('/')
                         }
                     });
@@ -36,7 +52,8 @@ export default class ToolPanel extends Component {
         return this.compile(toolPanelTpl,{
             children: {
                 profileIcon: profileIcon,
-                exitIcon: exitIcon
+                exitIcon: exitIcon,
+                addChatIcon: addChatIcon,
             }
         });
     }

@@ -1,6 +1,6 @@
 import {Route, BlockClass} from "./Route";
 import {ComponentProps} from "./Component";
-import LoginAPI from "../api/LoginAPI";
+import Store from "./Store";
 
 class Router {
     private static __instance: Router;
@@ -69,10 +69,10 @@ class Router {
     }
 
     checkRoute(route: Route): Route {
-        if (LoginAPI.isAuthenticated() && route._pathname === '/') { // если пользователь авторизован и пытается зайти на страницу логина, то выкидываем его на список чатов
+        if (Store.isAuthenticate() && route._pathname === '/') { // если пользователь авторизован и пытается зайти на страницу логина, то выкидываем его на список чатов
             window.history.replaceState({}, '', '/messenger');
             return this.getRoute('/messenger') ?? route;
-        } else if (!LoginAPI.isAuthenticated() && (route._pathname !== '/sign-up' && route._pathname !== '/' && route._pathname !== '/404' && route._pathname !== '/500')) { // если пользователь не авторизован он может попасть только на страницы ошибок, логина и регистрации
+        } else if (!Store.isAuthenticate() && (route._pathname !== '/sign-up' && route._pathname !== '/' && route._pathname !== '/404' && route._pathname !== '/500')) { // если пользователь не авторизован он может попасть только на страницы ошибок, логина и регистрации
             window.history.replaceState({}, '', '/');
             return this.getRoute('/') ?? route;
         } //и остаются остальные разрешённые случаи навигации

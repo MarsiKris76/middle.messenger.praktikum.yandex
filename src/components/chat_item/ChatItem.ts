@@ -9,7 +9,7 @@ export default class ChatItem extends Component {
 
         const avatar = new Avatar('', {
             src: imagePath,
-            alt_text: 'Картинка профиля',
+            alt_text: 'Картинка чата',
             classes: 'messenger__chat-avatar',
             isFragment: true,
         });
@@ -17,9 +17,8 @@ export default class ChatItem extends Component {
         return this.compile(chatItemTpl, {
             children: {
                 avatar: avatar
-            },
-            name: 'Имя Человека',
-            text: 'Текст последнего сообщения'
+            }
         });
     }
+
 }

@@ -5,7 +5,7 @@ import {
     DeleteChatRequest,
     DeleteChatResponse,
     GetChatRequest,
-    GetChatResponse
+    GetChatResponse, SimpleResponse, UsersRequest
 } from "../type/Types";
 
 class ChatAPI extends BaseAPI {
@@ -36,7 +36,7 @@ class ChatAPI extends BaseAPI {
     }
 
     public async getChats(param: GetChatRequest) {
-        return await this.http.get<GetChatResponse>('', {
+        return await this.http.get<GetChatResponse[]>('', {
             data: param,
             headers: {
                 'Content-Type': 'application/json'
@@ -47,6 +47,24 @@ class ChatAPI extends BaseAPI {
     public async deleteChats(chatId: DeleteChatRequest) {
         return await this.http.delete<DeleteChatResponse>('', {
             data: chatId,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    public async addUsers(param: UsersRequest) {
+        return await this.http.put<SimpleResponse>('/users', {
+            data: param,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    public async kickUsers(param: UsersRequest) {
+        return await this.http.delete<SimpleResponse>('/users', {
+            data: param,
             headers: {
                 'Content-Type': 'application/json'
             }

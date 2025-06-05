@@ -4,10 +4,11 @@ import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import {emailValidation, loginValidation, nameValidation, phoneValidation} from "../../utils/Validation";
 import {getProp} from "../../utils/Utils";
+import Store from "../../services/Store";
 
 export default class ChangeProfileForm extends Component {
     render() {
-        const storedProfile = localStorage.getItem('user');
+        const storedProfile = Store.getUser();
         const profile = storedProfile ? JSON.parse(storedProfile) : null;
         const loginInput = new Input('', {
             type: 'text', name: 'login', placeholder: 'Логин', value: getProp('login', profile),

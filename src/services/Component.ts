@@ -150,7 +150,7 @@ export default abstract class Component<Props extends ComponentProps = Component
             if (!stub)
                 return;
             const listContent = this.createDocumentElement('template', true) as HTMLTemplateElement;
-            child.forEach(item => {
+            child?.forEach(item => {
                 listContent.content.append(item.getContent());
             });
             stub.replaceWith(listContent.content);
@@ -230,11 +230,4 @@ export default abstract class Component<Props extends ComponentProps = Component
         return document.createElement(tagName);
     }
 
-    show() {
-        if (this._element instanceof HTMLElement) this._element.style.display = "block";
-    }
-
-    hide() {
-        if (this._element instanceof HTMLElement) this._element.style.display = "none";
-    }
 }
