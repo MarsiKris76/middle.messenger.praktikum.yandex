@@ -6,6 +6,8 @@ import ProfilePage from "./pages/profile/ProfilePage";
 import MessengerPage from "./pages/messenger/MessengerPage";
 import Error_404 from "./pages/error_404/Error_404";
 import Error_500 from "./pages/error_500/Error_500";
+import ChatCreaturePage from "./pages/chat_creature/ChatCreaturePage";
+import SearchUserPage from "./pages/search/SearchUserPage";
 
 Router
     .use('/', 'Вход', LoginPage, 'main', {
@@ -38,16 +40,14 @@ Router
             'class':'error500'
         }
     })
-    .start();
-
-document.addEventListener('click', (event) => {
-    const target = event.target as HTMLElement;
-    const link = target.closest('a');
-    if (link) {
-        event.preventDefault();
-        const href = link.getAttribute('href');
-        if (href) {
-            Router.go(href);
+    .use('/new-chat', 'Создание нового чата', ChatCreaturePage, 'main',{
+        attr: {
+            'class':'creature-chat'
         }
-    }
-});
+    })
+    .use('/list-chat-user', 'Добавление друга в чат', SearchUserPage, 'main',{
+        attr: {
+            'class':'creature-chat'
+        }
+    })
+    .start();

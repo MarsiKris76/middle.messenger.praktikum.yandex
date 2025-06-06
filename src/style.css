@@ -128,7 +128,7 @@ h1 {
 }
 
 /* БЭM стили */
-.login, .registration, .profile, .error404, .error500 {
+.login, .registration, .profile, .error404, .error500, .creature-chat {
   position: absolute;
   top: 0;
   width: 33%;
@@ -141,13 +141,13 @@ h1 {
   flex-direction: column;
 }
 
-.login__form, .registration__form, .change_password__form, .change_profile__form, .avatar__form, .message-feed__form {
+.login__form, .registration__form, .change_password__form, .change_profile__form, .avatar__form, .message-feed__form, .creature-chat__form {
   display: flex;
   flex-direction: column;
   width: 90%;
 }
 
-.login__submit, .registration__submit, .change_password__submit, .change_profile__submit, .message-feed__submit {
+.login__submit, .registration__submit, .change_password__submit, .change_profile__submit, .message-feed__submit, .creature-chat__submit {
   display: flex;
   justify-content: center;
   margin: 15px 0 0;
@@ -174,6 +174,10 @@ h1 {
 .registration {
   height: 350px;
   min-width: 450px;
+}
+
+.creature-chat {
+  height: 230px;
 }
 
 /* Блок смены пароля */
@@ -237,6 +241,7 @@ h1 {
   transition: background-color 0.2s ease;
 
   &:hover, &--active {
+    color: var(--chat_item_name_color);
     background-color: var(--chat_item_hover_color);
   }
 

@@ -53,7 +53,7 @@ class ChatAPI extends BaseAPI {
         });
     }
 
-    public async addUsers(param: UsersRequest) {
+    public async addUsersToChats(param: UsersRequest) {
         return await this.http.put<SimpleResponse>('/users', {
             data: param,
             headers: {
@@ -62,7 +62,7 @@ class ChatAPI extends BaseAPI {
         });
     }
 
-    public async kickUsers(param: UsersRequest) {
+    public async kickUsersFromChats(param: UsersRequest) {
         return await this.http.delete<SimpleResponse>('/users', {
             data: param,
             headers: {

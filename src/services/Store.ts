@@ -22,7 +22,7 @@ class Store {
         localStorage.removeItem('user');
     }
 
-    getUser() {
+    public getUser() {
         return localStorage.getItem('user');
     }
 
@@ -34,8 +34,17 @@ class Store {
         localStorage.removeItem('isAuthenticated');
     }
 
-    isAuthenticate() {
+    public isAuthenticate() {
         return !!localStorage.getItem('isAuthenticated');
+    }
+
+    saveChats(chats: string) {
+        localStorage.removeItem('chats');
+        localStorage.setItem('chats', chats);
+    }
+
+    getChats() {
+        return localStorage.getItem('chats');
     }
 
 }

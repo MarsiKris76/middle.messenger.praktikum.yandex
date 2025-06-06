@@ -21,7 +21,7 @@ export default class LoginPage extends Component {
                     const data = Object.fromEntries(new FormData(form));
                     LoginAPI.login(data as LoginRequest).then(r => {
                         if (r as string === 'OK') {
-                            Store.setAuthenticate()
+                            Store.setAuthenticate();
                             LoginAPI.getUser().then((u) => {
                                 Store.saveUser(JSON.stringify(u));
                                 Router.go('/messenger');

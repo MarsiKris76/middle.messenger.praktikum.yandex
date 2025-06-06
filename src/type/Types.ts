@@ -85,7 +85,7 @@ export type GetChatResponse = {
 }
 
 export type DeleteChatRequest = {
-    chatId: number,
+    chatId: string,
 }
 
 export type DeleteChatResponse = {

@@ -5,8 +5,6 @@ import ExitIcon from "../../components/icons/ExitIcon";
 import AddChatIcon from "../../components/icons/AddChat";
 import Router from "../../services/Router";
 import LoginAPI from "../../api/LoginAPI";
-import ChatAPI from "../../api/ChatAPI";
-import {CreateChatRequest} from "../../type/Types";
 import Store from "../../services/Store";
 
 export default class ToolPanel extends Component {
@@ -27,9 +25,7 @@ export default class ToolPanel extends Component {
                 click: (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    ChatAPI.createChat({title: 'Новый чат'} as CreateChatRequest).then((result) => {
-                        console.log(result);
-                    });
+                    Router.go('/new-chat')
                 }
             }
         });
