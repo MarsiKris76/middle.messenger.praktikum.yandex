@@ -13,6 +13,11 @@ export function getProp(key: string, obj: unknown): string {
     return typeof value === 'string' ? value : '';
 }
 
+
+export function isEqual(lhs: string, rhs: string): boolean {
+    return lhs === rhs;
+}
+
 // function trim(str: string, rule?: string): string {
 //     str = str.trim();
 //     if (rule) {

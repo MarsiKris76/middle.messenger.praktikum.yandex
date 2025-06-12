@@ -32,21 +32,55 @@ class Store {
 
     public removeAuthenticate() {
         localStorage.removeItem('isAuthenticated');
+        this.removeAllChatUsersInfo();
     }
 
     public isAuthenticate() {
         return !!localStorage.getItem('isAuthenticated');
     }
 
-    saveChats(chats: string) {
-        localStorage.removeItem('chats');
-        localStorage.setItem('chats', chats);
+    public saveChatUser(chatNo: string, userId: string) {
+        const chatUsers = localStorage.getItem('ChatUser_' + chatNo);
+        if (chatUsers && chatUsers.length > 0 && !chatUsers.includes(userId)) {
+            localStorage.setItem('ChatUser_' + chatNo, chatUsers + '{' + userId + '}');
+        } else if (chatUsers && chatUsers.includes(userId)) {
+            return;
+        }
+        else {
+            localStorage.setItem('ChatUser_' + chatNo, '{' + userId + '}');
+        }
     }
 
-    getChats() {
-        return localStorage.getItem('chats');
+    public removeChatUser(chatNo: string, userId: string) {
+        const chatUsers = localStorage.getItem('ChatUser_' + chatNo);
+        if (chatUsers && chatUsers.length > 0 && chatUsers.includes('{' + userId + '}')) {
+            localStorage.setItem('ChatUser_' + chatNo, chatUsers.replace('{' + userId + '}', ''));
+        } else return;
     }
 
+    public checkChatUser(chatNo: string, userId: string): boolean {
+        const usersList = localStorage.getItem('ChatUser_' + chatNo);
+        if (usersList) {
+            return usersList.includes('{' + userId + '}');
+        }
+        return false;
+    }
+
+    public removeAllChatUsersInfo() {
+        removeLocalStorageByPrefix('ChatUser_');
+    }
+
+}
+
+function removeLocalStorageByPrefix(prefix: string) {
+    const keysToRemove: string[] = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith(prefix)) {
+            keysToRemove.push(key);
+        }
+    }
+    keysToRemove.forEach(key => localStorage.removeItem(key));
 }
 
 export default Store.getInstance();

@@ -1,5 +1,6 @@
 import {BaseAPI} from "./BaseAPI";
 import {
+    ChatUsersResponse,
     CreateChatRequest,
     CreateChatResponse,
     DeleteChatRequest,
@@ -65,6 +66,14 @@ class ChatAPI extends BaseAPI {
     public async kickUsersFromChats(param: UsersRequest) {
         return await this.http.delete<SimpleResponse>('/users', {
             data: param,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    public async getChatUsers(chatId: string) {
+        return await this.http.get<ChatUsersResponse[]>('/' + chatId + '/users', {
             headers: {
                 'Content-Type': 'application/json'
             }

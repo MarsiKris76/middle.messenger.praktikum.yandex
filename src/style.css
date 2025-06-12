@@ -128,7 +128,7 @@ h1 {
 }
 
 /* БЭM стили */
-.login, .registration, .profile, .error404, .error500, .creature-chat {
+.login, .registration, .profile, .error404, .error500, .creature-chat, .search {
   position: absolute;
   top: 0;
   width: 33%;
@@ -141,19 +141,19 @@ h1 {
   flex-direction: column;
 }
 
-.login__form, .registration__form, .change_password__form, .change_profile__form, .avatar__form, .message-feed__form, .creature-chat__form {
+.login__form, .registration__form, .change_password__form, .change_profile__form, .avatar__form, .message-feed__form, .creature-chat__form, .search__form {
   display: flex;
   flex-direction: column;
   width: 90%;
 }
 
-.login__submit, .registration__submit, .change_password__submit, .change_profile__submit, .message-feed__submit, .creature-chat__submit {
+.login__submit, .registration__submit, .change_password__submit, .change_profile__submit, .message-feed__submit, .creature-chat__submit, .search__submit {
   display: flex;
   justify-content: center;
   margin: 15px 0 0;
 }
 
-.registration__inputs_row, .change_password__inputs_row, .change_profile__inputs_row, .message-feed__inputs_row {
+.registration__inputs_row, .change_password__inputs_row, .change_profile__inputs_row, .message-feed__inputs_row, .search__inputs_row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -319,5 +319,54 @@ h1 {
     height: 34px;
     margin-top: 10px;
     cursor: pointer;
+  }
+}
+
+.search {
+  &__result {
+    color: var(--chat_item_preview_message_color);
+    font-size: small;
+    display: ruby;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  &__cancel {
+    margin-bottom: 10px;
+  }
+
+  &__user-item {
+    color: var(--base_text_color);
+    background-color: var(--base_theme_color);
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 2px 2px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 3px;
+  }
+
+  &__user-item--active {
+    color: var(--base_text_color);
+    background-color: var(--chat_item_name_color);
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 2px 2px;
+    font-size: 12px;
+    cursor: pointer;
+    margin: 3px;
+  }
+
+  &__user-item svg{
+    display: none;
+  }
+
+  &__user-item--active svg{
+    display: flex;
+    justify-content: center;
+    color: var(--base_theme_color);
+    margin-left: 3px;
   }
 }

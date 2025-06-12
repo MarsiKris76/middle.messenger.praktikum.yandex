@@ -1,7 +1,9 @@
 const searchUserTpl = `
-    {{{userName}}}
-    {{{searchBtn}}}
-    <div id='preview-user'></div>
+    <form class='search__form'>
+        {{{userName}}}
+        {{{searchBtn}}}
+    </form>
+    <div class='search__result'>Результаты поиска...</div>
 `;
 
 export default searchUserTpl;

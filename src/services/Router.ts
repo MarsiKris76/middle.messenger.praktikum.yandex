@@ -1,6 +1,7 @@
-import {Route, BlockClass} from "./Route";
+import {Route} from "./Route";
 import {ComponentProps} from "./Component";
 import Store from "./Store";
+import {BlockClass} from "../type/Types";
 
 class Router {
     private static __instance: Router;
@@ -41,17 +42,17 @@ class Router {
         const pathname = window.location.pathname;
         let route = this.getRoute(pathname);
         if (!route) {
-            this.go('/404');
-            return;
+            window.history.replaceState({}, '', '/404');
+            route = this.getRoute('/404');
         }
-        route = this.checkRoute(route);
+        route = this.checkRoute(route!);
         this._currentRoute?.leave();
         this._currentRoute = route;
         route.render();
     }
 
     getRoute(pathname: string): Route | null {
-        const route = this.routes.find(route => route._pathname === pathname);
+        const route = this.routes.find(route => route.match(pathname));
         return route || null;
     }
 

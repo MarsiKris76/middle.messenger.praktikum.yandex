@@ -41,7 +41,14 @@ export default class ChatItem extends Component {
                 click: (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    Router.go('/list-chat-user')
+                    const ec = event.target as HTMLElement;
+                    const chatItem = ec.closest('.chat-item') as HTMLElement | null;
+                    if (chatItem) {
+                        const chatIdAtr = chatItem.getAttribute('id');
+                        const chatId = chatIdAtr ? chatIdAtr.substring(5) : '';
+                        Router.go('/list-chat-user/' + chatId);
+                    }
+
                 }
             }
         });

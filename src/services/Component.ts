@@ -189,7 +189,7 @@ export default abstract class Component<Props extends ComponentProps = Component
                 this._element?.children[0].removeEventListener(eventsName, events[eventsName]);
             else
                 this._element?.removeEventListener(eventsName, events[eventsName]);
-        })
+        });
     }
 
     addAttribute() {

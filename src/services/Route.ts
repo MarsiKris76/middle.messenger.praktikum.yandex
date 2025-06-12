@@ -1,10 +1,6 @@
 import Component, {ComponentProps} from "./Component";
-
-function isEqual(lhs: string, rhs: string): boolean {
-    return lhs === rhs;
-}
-
-export type BlockClass = new (tagName: string, props: ComponentProps) => Component;
+import {BlockClass} from "../type/Types";
+import {isEqual} from "../utils/Utils";
 
 export class Route {
     private readonly _blockClass: BlockClass;
@@ -42,7 +38,17 @@ export class Route {
     }
 
     match(pathname: string) {
-        return isEqual(pathname, this._pathname);
+        const routeParts = this._pathname.split('/').filter(Boolean);
+        const pathParts = pathname.split('/').filter(Boolean);
+        if (routeParts.length !== pathParts.length) return false;
+        for (let i = 0; i < routeParts.length; i++) {
+            const routePart = routeParts[i];
+            const pathPart = pathParts[i];
+            if (!routePart.startsWith(':') && !isEqual(routePart, pathPart)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     leave() {

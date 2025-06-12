@@ -45,9 +45,9 @@ Router
             'class':'creature-chat'
         }
     })
-    .use('/list-chat-user', 'Добавление друга в чат', SearchUserPage, 'main',{
+    .use('/list-chat-user/:id', 'Добавление друга в чат', SearchUserPage, 'main',{
         attr: {
-            'class':'creature-chat'
+            'class':'search'
         }
     })
     .start();

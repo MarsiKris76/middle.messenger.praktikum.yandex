@@ -1,6 +1,6 @@
 const searchUserPageTpl = `
     {{{searchUser}}}
-    <hr class="divider">
+    <hr class='divider'>
     <div>
         {{{ cancelBtn }}}
     </div>

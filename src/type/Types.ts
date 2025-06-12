@@ -1,3 +1,5 @@
+import Component, {ComponentProps} from "../services/Component";
+
 export type SimpleResponse = {
     response?: string;
 };
@@ -99,6 +101,18 @@ export type DeleteChatResponse = {
 }
 
 export type UsersRequest = {
-    users: number[],
-    chatId: number
+    users: string[],
+    chatId: string
 }
+
+export type ChatUsersResponse = {
+    id: number,
+    first_name: string,
+    second_name: string,
+    display_name: string,
+    login: string,
+    avatar: string,
+    role: string
+}
+
+export type BlockClass = new (tagName: string, props: ComponentProps) => Component;
