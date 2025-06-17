@@ -16,7 +16,7 @@ export default class RegistrationPage extends Component {
                     const form = event.target as HTMLFormElement;
                     if (checkForm(form)) return; // если есть ошибки валидации, то дальше не продолжаем.
                     const data = Object.fromEntries(new FormData(form));
-                    LoginAPI.signup(data as SignUpRequest).then(r => console.log(r)).then(LoginAPI.getUser);
+                    LoginAPI.signup(data as SignUpRequest).then(LoginAPI.getUser);
                 }
             }
         });

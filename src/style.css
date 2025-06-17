@@ -231,6 +231,7 @@ h1 {
     padding: 20px;
     overflow-y: auto;
     background-color: var(--message_feed_background_color);
+    color: var(--chat_item_preview_message_color);
   }
 }
 

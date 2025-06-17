@@ -9,33 +9,32 @@ import Store from "../../services/Store";
 export default class ChangeProfileForm extends Component {
     render() {
         const storedProfile = Store.getUser();
-        const profile = storedProfile ? JSON.parse(storedProfile) : null;
         const loginInput = new Input('', {
-            type: 'text', name: 'login', placeholder: 'Логин', value: getProp('login', profile),
+            type: 'text', name: 'login', placeholder: 'Логин', value: getProp('login', storedProfile),
             events: {blur: loginValidation},
             isFragment: true
         });
         const displayName = new Input('', {
-            type: 'text', name: 'display_name', placeholder: 'Отображаемое имя', value: getProp('display_name', profile),
+            type: 'text', name: 'display_name', placeholder: 'Отображаемое имя', value: getProp('display_name', storedProfile),
             isFragment: true
         });
         const firstName = new Input('', {
-            type: 'text', name: 'first_name', placeholder: 'Имя', value: getProp('first_name', profile),
+            type: 'text', name: 'first_name', placeholder: 'Имя', value: getProp('first_name', storedProfile),
             events: {blur: nameValidation},
             isFragment: true
         });
         const secondName = new Input('', {
-            type: 'text', placeholder: 'Фамилия', name: 'second_name', value: getProp('second_name', profile),
+            type: 'text', placeholder: 'Фамилия', name: 'second_name', value: getProp('second_name', storedProfile),
             events: {blur: nameValidation},
             isFragment: true
         });
         const email = new Input('', {
-            type: 'email', name: 'email', placeholder: 'Электронный адрес', value: getProp('email', profile),
+            type: 'email', name: 'email', placeholder: 'Электронный адрес', value: getProp('email', storedProfile),
             events: {blur: emailValidation},
             isFragment: true
         });
         const phone = new Input('', {
-            type: 'text', name: 'phone', placeholder: 'Телефон', value: getProp('phone', profile),
+            type: 'text', name: 'phone', placeholder: 'Телефон', value: getProp('phone', storedProfile),
             events: {blur: phoneValidation},
             isFragment: true
         });

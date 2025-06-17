@@ -1,5 +1,6 @@
 import {BaseAPI} from "./BaseAPI";
 import {
+    ChatTokenResponse,
     ChatUsersResponse,
     CreateChatRequest,
     CreateChatResponse,
@@ -75,6 +76,15 @@ class ChatAPI extends BaseAPI {
     public async getChatUsers(chatId: string) {
         return await this.http.get<ChatUsersResponse[]>('/' + chatId + '/users', {
             headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    public async getChatToken(chatId: string) {
+        return await this.http.post<ChatTokenResponse>('/token/' + chatId, {
+            headers: {
+                'mode': 'cors',
                 'Content-Type': 'application/json'
             }
         });

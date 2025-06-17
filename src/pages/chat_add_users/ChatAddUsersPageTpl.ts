@@ -1,4 +1,4 @@
-const searchUserPageTpl = `
+const chatAddUsersTpl = `
     {{{searchUser}}}
     <hr class='divider'>
     <div>
@@ -6,4 +6,4 @@ const searchUserPageTpl = `
     </div>
 `;
 
-export default searchUserPageTpl;
+export default chatAddUsersTpl;

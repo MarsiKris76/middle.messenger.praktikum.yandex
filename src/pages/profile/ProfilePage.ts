@@ -16,8 +16,7 @@ export default class ProfilePage extends Component {
 
     render() {
         const storedProfile = Store.getUser();
-        const profile = storedProfile ? JSON.parse(storedProfile) : null;
-        const avatarLink = getProp('avatar', profile);
+        const avatarLink = getProp('avatar', storedProfile);
         const avatar = new Avatar('div', {
             src: avatarLink === '' ? imagePath : 'https://ya-praktikum.tech/api/v2/resources/' + avatarLink,
             alt_text: 'Картинка профиля',
@@ -47,8 +46,7 @@ export default class ProfilePage extends Component {
                     UserAPI.changeUserAvatar(formData).then(u => {
                         Store.saveUser(JSON.stringify(u));
                         const storedProfile = Store.getUser();
-                        const profile = storedProfile ? JSON.parse(storedProfile) : null;
-                        const avatarLink = getProp('avatar', profile);
+                        const avatarLink = getProp('avatar', storedProfile);
                         avatar.setProps({src: avatarLink === '' ? imagePath : 'https://ya-praktikum.tech/api/v2/resources/' + avatarLink});
                     }).catch(() => alert('Ошибка изменения аватара.'));
                 }

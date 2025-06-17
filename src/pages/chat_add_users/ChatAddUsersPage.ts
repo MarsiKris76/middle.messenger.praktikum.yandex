@@ -1,12 +1,12 @@
 import Component from "../../services/Component";
 import Router from "../../services/Router";
 import Button from "../../components/button/Button";
-import searchUserPageTpl from "./SearchUserPageTpl";
+import chatAddUsersPageTpl from "./ChatAddUsersPageTpl";
 import SearchUser from "../../blocks/search/SearchUser";
 import ChatAPI from "../../api/ChatAPI";
 import Store from "../../services/Store";
 
-export default class SearchUserPage extends Component {
+export default class ChatAddUsersPage extends Component {
     render() {
         const searchUser = new SearchUser('', {
             isFragment: true,
@@ -41,7 +41,7 @@ export default class SearchUserPage extends Component {
                 }
             }
         });
-        return this.compile(searchUserPageTpl, {
+        return this.compile(chatAddUsersPageTpl, {
             children: {
                 searchUser: searchUser,
                 cancelBtn: cancelBtn

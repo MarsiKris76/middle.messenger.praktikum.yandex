@@ -3,7 +3,7 @@ import searchUserTpl from "./SearchUserTpl";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import UserAPI from "../../api/UserAPI";
-import UserItem from "../../components/user/UserItem";
+import UserItem from "../../components/user_item/UserItem";
 import ChatAPI from "../../api/ChatAPI";
 import Store from "../../services/Store";
 

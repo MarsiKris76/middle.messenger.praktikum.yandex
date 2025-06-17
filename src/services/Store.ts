@@ -1,3 +1,5 @@
+import {UserResponse} from "../type/Types";
+
 class Store {
     private static __instance: Store;
 
@@ -23,7 +25,8 @@ class Store {
     }
 
     public getUser() {
-        return localStorage.getItem('user');
+        const storedProfile = localStorage.getItem('user');
+        return storedProfile ? JSON.parse(storedProfile) as UserResponse : null;
     }
 
     public setAuthenticate() {

@@ -1,5 +1,5 @@
 const messageTpl = `
-    <div class="message-feed__message {{getMessageDirection isIncoming}}">
+    <div class="message-feed__message {{getMessageDirection isOutgoing}}">
         {{text}}
     </div>
 `;

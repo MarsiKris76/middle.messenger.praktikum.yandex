@@ -1,3 +1,5 @@
+import Store from "../services/Store";
+
 export function isObject(value: unknown): value is Record<string, unknown> {
     return typeof value === 'object' && value !== null;
 }
@@ -10,12 +12,19 @@ export function getProp(key: string, obj: unknown): string {
         return '';
     }
     const value = obj[key];
-    return typeof value === 'string' ? value : '';
+    return String(value);
 }
 
 
 export function isEqual(lhs: string, rhs: string): boolean {
     return lhs === rhs;
+}
+
+export function getUserName(): string {
+    const userInfo = Store.getUser();
+    return getProp('display_name', userInfo) ? getProp('display_name', userInfo) :
+        getProp('second_name', userInfo) ? getProp('first_name', userInfo) + ' ' + getProp('second_name', userInfo) :
+            getProp('second_name', userInfo);
 }
 
 // function trim(str: string, rule?: string): string {

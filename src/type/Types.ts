@@ -115,4 +115,20 @@ export type ChatUsersResponse = {
     role: string
 }
 
+export type ChatTokenResponse = {
+    token: string
+}
+
+export type MassageFromSocket = {
+    id?: string,
+    time?: string,
+    user_id?: string,
+    content?: string,
+    type?: string
+}
+
+export type MessageFormType = {
+    message: string,
+}
+
 export type BlockClass = new (tagName: string, props: ComponentProps) => Component;

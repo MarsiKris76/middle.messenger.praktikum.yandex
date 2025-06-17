@@ -7,7 +7,7 @@ import MessengerPage from "./pages/messenger/MessengerPage";
 import Error_404 from "./pages/error_404/Error_404";
 import Error_500 from "./pages/error_500/Error_500";
 import ChatCreaturePage from "./pages/chat_creature/ChatCreaturePage";
-import SearchUserPage from "./pages/search/SearchUserPage";
+import ChatAddUsersPage from "./pages/chat_add_users/ChatAddUsersPage";
 
 Router
     .use('/', 'Вход', LoginPage, 'main', {
@@ -45,7 +45,7 @@ Router
             'class':'creature-chat'
         }
     })
-    .use('/list-chat-user/:id', 'Добавление друга в чат', SearchUserPage, 'main',{
+    .use('/list-chat-user/:id', 'Добавление друга в чат', ChatAddUsersPage, 'main',{
         attr: {
             'class':'search'
         }
