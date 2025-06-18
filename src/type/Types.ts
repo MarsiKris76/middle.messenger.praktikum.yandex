@@ -132,3 +132,11 @@ export type MessageFormType = {
 }
 
 export type BlockClass = new (tagName: string, props: ComponentProps) => Component;
+
+export type MassageListFromSocket = {
+    chat_id: number,
+    time: string,
+    type: string,
+    user_id: string,
+    content: string,
+}

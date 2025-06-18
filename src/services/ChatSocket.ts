@@ -1,4 +1,4 @@
-import {MassageFromSocket} from "../type/Types";
+import {MassageFromSocket, MassageListFromSocket} from "../type/Types";
 import ChatAPI from "../api/ChatAPI";
 import Store from "./Store";
 import {getProp, getUserName} from "../utils/Utils";
@@ -27,7 +27,7 @@ class ChatSocket {
         return ChatSocket.__instance;
     }
 
-    public connect(chatId: string, userId: string, onMessageCallback: (message: string, isOutgoing: boolean) => void) {
+    public connect(chatId: string, userId: string, onMessageCallback: (message: string, isOutgoing: boolean, isOld?: boolean) => void) {
         if (this._chatId === chatId && this._userId === userId)
             return; // значит меня подключение не нужно
         this.stopPing();
@@ -45,14 +45,22 @@ class ChatSocket {
                 });
                 this._outgoingQueue = [];
                 this.startPing();
-                this.getOldMessages();
+                this.getOldMessages(1);
             };
 
             this._socket.onmessage = (event) => {
                 try {
-                    const message = JSON.parse(event.data) as MassageFromSocket;
-                    if (message.type && message.type === 'message' && typeof message.content === 'string')
-                        onMessageCallback(message.content, String(message.user_id) === getProp('id', Store.getUser()));
+                    if (Array.isArray(JSON.parse(event.data))) {
+                        const messages = JSON.parse(event.data) as MassageListFromSocket[];
+                        messages.forEach(message => {
+                            onMessageCallback(message.content, String(message.user_id) === getProp('id', Store.getUser()), true);
+                        });
+                    } else {
+                        const message = JSON.parse(event.data) as MassageFromSocket;
+                        if (message.type && message.type === 'message' && typeof message.content === 'string') {
+                            onMessageCallback(message.content, String(message.user_id) === getProp('id', Store.getUser()));
+                        }
+                    }
                 } catch (e) {
                     console.error('Не удалось разобрать сообщение:', e);
                 }
@@ -84,9 +92,9 @@ class ChatSocket {
         this.sendMessage(getUserName() + ' в чате.');
     }
 
-    getOldMessages() {
+    public getOldMessages(offSet: number) {
         this._socket?.send(JSON.stringify({
-            content: 0,
+            content: offSet,
             type: 'get old',
         }));
     }

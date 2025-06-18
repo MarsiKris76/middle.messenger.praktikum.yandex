@@ -9,13 +9,29 @@ import ChatSocket from "../../services/ChatSocket";
 import {getProp} from "../../utils/Utils";
 import {checkForm} from "../../utils/Validation";
 import {MessageFormType} from "../../type/Types";
+import MessageFeed from "../../components/message_feed/MessageFeed";
 
 let messagesPanel: Element | null = null;
+let count: number = 1;
 
-function showMessage(massageText: string, isOutgoing: boolean) {
+function showMessage(massageText: string, isOutgoing: boolean, isOld?: boolean) {
     const massage = new Message('', {isFragment: true, text: massageText, isOutgoing: isOutgoing}).render();
     if (messagesPanel) {
-        messagesPanel.append(massage);
+        if (isOld) {
+            messagesPanel.prepend(massage);
+            if (count === 1) {
+                messagesPanel.scrollTo({
+                    top: messagesPanel.scrollHeight,
+                    behavior: 'smooth'
+                });
+            }
+        } else {
+            messagesPanel.append(massage);
+            messagesPanel.scrollTo({
+                top: messagesPanel.scrollHeight,
+                behavior: 'smooth'
+            });
+        }
     }
 }
 
@@ -45,6 +61,7 @@ export default class MessengerPage extends Component {
                     const ec = event.target as HTMLElement;
                     const chatItem = ec.closest('.chat-item') as HTMLElement | null;
                     if (chatItem) {
+                        count = 1;
                         document.querySelectorAll('.chat-item--active').forEach(el => {
                             el.classList.remove('chat-item--active');
                         });
@@ -58,6 +75,16 @@ export default class MessengerPage extends Component {
                 }
             }
         });
+        const messageFeed = new MessageFeed('', {
+            isFragment: true,
+            events: {
+                scroll: () => {
+                    if (messagesPanel && messagesPanel.scrollTop === 0 && messagesPanel.innerHTML) {
+                        ChatSocket.getOldMessages(count+=20);
+                    }
+                }
+            }
+        });
         const toolPanel = new ToolPanel('div', {
             attr: {
                 'class':'sidebar'
@@ -67,6 +94,7 @@ export default class MessengerPage extends Component {
             children: {
                 toolPanel: toolPanel,
                 chatList: chatList,
+                messageFeed: messageFeed,
                 messageForm: messageForm
             }
         });
