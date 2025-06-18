@@ -69,7 +69,7 @@ export default class MessengerPage extends Component {
                         const chatID = chatItem.id.substring(5);
                         messagesPanel = document.querySelector('.messenger__message-feed');
                         if (messagesPanel)
-                            messagesPanel.innerHTML = '';
+                            messagesPanel.textContent = '';
                         ChatSocket.connect(chatID, getProp('id', Store.getUser()), showMessage);
                     }
                 }
@@ -79,7 +79,7 @@ export default class MessengerPage extends Component {
             isFragment: true,
             events: {
                 scroll: () => {
-                    if (messagesPanel && messagesPanel.scrollTop === 0 && messagesPanel.innerHTML) {
+                    if (messagesPanel && messagesPanel.scrollTop === 0 && messagesPanel.textContent) {
                         ChatSocket.getOldMessages(count+=20);
                     }
                 }
