@@ -140,3 +140,10 @@ export type MassageListFromSocket = {
     user_id: string,
     content: string,
 }
+
+export type ErrorResponse = {
+    response: {
+        reason: string,
+    },
+    status: number,
+}
