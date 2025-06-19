@@ -1,7 +1,7 @@
 const profilePageTpl = `
     <div class='avatar__form'>
         {{{avatar}}}
-        {{{avatarSelectBtn}}} <!--в дальнейшем нужно будет связать кнопку с инпутом-->
+        {{{avatarSelectBtn}}}
         {{{avatarInput}}}
     </div>
     <hr class='divider'>

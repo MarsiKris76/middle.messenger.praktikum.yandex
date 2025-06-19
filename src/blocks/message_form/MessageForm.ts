@@ -2,7 +2,7 @@ import Component from "../../services/Component";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import messageFormTpl from "./MessageFormTpl";
-import {emptyValidation} from "../../utils/validation";
+import {emptyValidation} from "../../utils/Validation";
 
 export default class MessageForm extends Component {
 

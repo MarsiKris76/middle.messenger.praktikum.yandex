@@ -14,6 +14,5 @@ export default defineConfig([
       "**/*.min.js",
       "node_modules",
       "vite.config.js",
-      "src/utils/req.ts",
   ]),
 ]);

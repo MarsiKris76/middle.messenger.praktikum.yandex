@@ -8,7 +8,7 @@ import {
     nameValidation,
     passwordValidation,
     phoneValidation
-} from "../../utils/validation";
+} from "../../utils/Validation";
 
 export default class RegistrationForm extends Component {
 

@@ -1,6 +1,6 @@
 const loginPageTpl = `
     {{{ loginForm }}}
-    <hr class="divider">
+    <hr class='divider'>
     <div>
         {{{ registrationBtn }}}
     </div>
