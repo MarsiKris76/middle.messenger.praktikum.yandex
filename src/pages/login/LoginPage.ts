@@ -4,7 +4,7 @@ import LoginForm from "../../blocks/login/LoginForm";
 import Button from "../../components/button/Button";
 import Router from "../../services/Router";
 import LoginAPI from "../../api/LoginAPI";
-import {LoginRequest} from "../../type/Types";
+import {ErrorResponse, LoginRequest} from "../../type/Types";
 import {checkForm} from "../../utils/Validation";
 import Store from "../../services/Store";
 
@@ -27,8 +27,12 @@ export default class LoginPage extends Component {
                                 Router.go('/messenger');
                             });
                         }
-                    }).catch(() => {
-                        alert('Проверьте логин или пароль.');
+                    }).catch((e) => {
+                        const error = e as ErrorResponse
+                        if (error.response?.reason && error.response.reason === 'User already in system')
+                            alert('Нужно выйти из приложения чата другой проектной работы для начала работы в этом приложении.')
+                        else
+                            alert('Проверьте логин или пароль.');
                     });
                 }
             }
