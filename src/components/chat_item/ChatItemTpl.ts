@@ -1,12 +1,13 @@
 const chatItemTpl = `
-    <div class='chat-item'>
+    <div {{#if id}} id='{{id}}'{{/if}} class='chat-item'>
         <div class='chat-item__content'>
-            {{{avatar}}}
+            {{{deleteChat}}}
+            {{{addUser}}}
             <div class='chat-item__text'>
-                <div class='chat-item__name'>
+                <div title='{{name}}' class='chat-item__name'>
                     {{name}}
                 </div>
-                <div class='chat-item__preview'>
+                <div title='{{text}}' class='chat-item__preview'>
                     {{text}}
                 </div>
             </div>

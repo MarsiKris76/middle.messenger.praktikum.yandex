@@ -2,7 +2,7 @@ import Component from "../../services/Component";
 import Input from "../../components/input/Input";
 import Button from "../../components/button/Button";
 import changePasswordForm from "./ChangePasswordTpl";
-import {passwordValidation} from "../../utils/validation";
+import {passwordValidation} from "../../utils/Validation";
 
 export default class ChangePasswordForm extends Component {
     render() {
