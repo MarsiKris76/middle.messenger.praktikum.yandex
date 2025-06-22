@@ -1,11 +1,8 @@
 const messengerPageTpl = `
-    <div class='messenger__chat-list'>
-        {{{chatItems}}}
-    </div>
+    {{{toolPanel}}}
+    {{{chatList}}}
     <div class='messenger__chat-content'>
-        <div class='messenger__message-feed'>
-            {{{messages}}}
-        </div>
+        {{{messageFeed}}}
         {{{messageForm}}}
     </div>
 `;

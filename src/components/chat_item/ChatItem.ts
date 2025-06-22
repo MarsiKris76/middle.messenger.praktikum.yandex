@@ -1,25 +1,68 @@
 import Component from "../../services/Component";
 import chatItemTpl from "./ChatItemTpl";
-import Avatar from "../avatar/Avatar";
+import DeleteIcon from "../icons/Delete";
+import ChatAPI from "../../api/ChatAPI";
+import Router from "../../services/Router";
+import ListUsersIcon from "../icons/ListUsers";
 
-const imagePath = new URL('../../resources/404_image.jpg', import.meta.url).href;
-// нужна будет реализация с передачей параметров
 export default class ChatItem extends Component {
     render() {
+        const deleteIcon = new DeleteIcon('div', {
+            attr: {
+                'title': 'Удалить',
+            },
+            events: {
+                click: (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if (!(event.target instanceof HTMLElement))
+                        return;
+                    const ec = event.target;
+                    const chatItem = ec.closest('.chat-item') as HTMLElement | null;
+                    if (chatItem) {
+                        const chatIdAtr = chatItem.getAttribute('id');
+                        const chatId = chatIdAtr ? chatIdAtr.substring(5) : '';
+                        ChatAPI.deleteChats({chatId}).then(() => {
+                            const delChat = document.getElementById('chat_' + chatId);
+                            if (delChat) {
+                                delChat.remove();
+                            }
+                        }).catch(() => {
+                            alert('Ошибка удаления чата. Обновите страницу.');
+                        });
+                    }
+                }
+            }
+        });
 
-        const avatar = new Avatar('', {
-            src: imagePath,
-            alt_text: 'Картинка профиля',
-            classes: 'messenger__chat-avatar',
-            isFragment: true,
+        const addUserIcon = new ListUsersIcon('div', {
+            attr: {
+                'title': 'Список пользователей чата',
+            },
+            events: {
+                click: (event) => {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    if (!(event.target instanceof HTMLElement))
+                        return;
+                    const ec = event.target;
+                    const chatItem = ec.closest('.chat-item') as HTMLElement | null;
+                    if (chatItem) {
+                        const chatIdAtr = chatItem.getAttribute('id');
+                        const chatId = chatIdAtr ? chatIdAtr.substring(5) : '';
+                        Router.go('/list-chat-user/' + chatId);
+                    }
+
+                }
+            }
         });
 
         return this.compile(chatItemTpl, {
             children: {
-                avatar: avatar
-            },
-            name: 'Имя Человека',
-            text: 'Текст последнего сообщения'
+                deleteChat: deleteIcon,
+                addUser: addUserIcon
+            }
         });
     }
+
 }

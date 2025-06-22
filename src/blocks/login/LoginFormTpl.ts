@@ -1,5 +1,5 @@
 const loginFormTpl = `
-    <form id='form' action="/auth/signin" method="post" class="login__form">
+    <form action='/auth/signin' method='post' class='login__form'>
         {{{login}}}
         {{{password}}}
         {{{submitBtn}}}

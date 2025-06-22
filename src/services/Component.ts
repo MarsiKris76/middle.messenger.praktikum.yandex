@@ -8,11 +8,11 @@ interface Children {
     [key: string]: Component<ComponentProps>;
 }
 
-interface ChildrenLists {
+export interface ChildrenLists {
     [key: string]: Component<ComponentProps>[];
 }
 
-interface ComponentProps {
+export interface ComponentProps {
     [key: string]: unknown;
     children?: Children;
     events?: Record<string, (event: Event) => void>;
@@ -97,7 +97,7 @@ export default abstract class Component<Props extends ComponentProps = Component
         if (Object.values(props).length)
             Object.assign(this._props, props);
         if (this._setUpdate) {
-            this._eventBus.emit(Component.EVENTS.FLOW_CDM, oldValues, this._props);
+            this._eventBus.emit(Component.EVENTS.FLOW_CDU, oldValues, this._props);
             this._setUpdate = false;
         }
     };
@@ -120,10 +120,6 @@ export default abstract class Component<Props extends ComponentProps = Component
                 throw new Error('Нет доступа');
             }
         });
-    }
-
-    get element() {
-        return this._element;
     }
 
     compile(template: string, props?: ComponentProps): InnerElement {
@@ -154,7 +150,7 @@ export default abstract class Component<Props extends ComponentProps = Component
             if (!stub)
                 return;
             const listContent = this.createDocumentElement('template', true) as HTMLTemplateElement;
-            child.forEach(item => {
+            child?.forEach(item => {
                 listContent.content.append(item.getContent());
             });
             stub.replaceWith(listContent.content);
@@ -179,15 +175,21 @@ export default abstract class Component<Props extends ComponentProps = Component
     addEvents() {
         const { events = {} } = this._props;
         Object.keys(events).forEach( (eventsName: string) => {
-            this._element?.addEventListener(eventsName, events[eventsName]);
+            if (this._isFragment)
+                this._element?.children[0].addEventListener(eventsName, events[eventsName]);
+            else
+                this._element?.addEventListener(eventsName, events[eventsName]);
         });
     }
 
     removeEvents() {
         const { events = {} } = this._props;
         Object.keys(events).forEach( (eventsName: string) => {
-            this._element?.removeEventListener(eventsName, events[eventsName]);
-        })
+            if (this._isFragment)
+                this._element?.children[0].removeEventListener(eventsName, events[eventsName]);
+            else
+                this._element?.removeEventListener(eventsName, events[eventsName]);
+        });
     }
 
     addAttribute() {
@@ -220,18 +222,12 @@ export default abstract class Component<Props extends ComponentProps = Component
     createDocumentElement(tagName: string, isTemplate: boolean) {
         if (this._isFragment && !isTemplate)
             return document.createDocumentFragment();
-        const element = document.createElement(tagName);
+        //const element = ;
         // не помню откуда и зачем, но подозреваю, что в будущем пригодиться
         // if (this._props.settings?.withInternalID)
         //     element.setAttribute('date-id', this._id)
-        return element;
+        //return element;
+        return document.createElement(tagName);
     }
 
-    show() {
-        if (this._element instanceof HTMLElement) this._element.style.display = "block";
-    }
-
-    hide() {
-        if (this._element instanceof HTMLElement) this._element.style.display = "none";
-    }
 }
