@@ -11,7 +11,7 @@ export default class ChatList extends Component {
             if (chatsPanel) {
                 chats.forEach(c => {
                     const chat = new ChatItem('', {
-                        isFragment: true, id: 'chat_' + c.id ,name: c.title, text: c.last_message.content || '...',
+                        isFragment: true, id: 'chat_' + c.id ,name: c.title, text: c.last_message?.content || '...',
                     });
                     this.chatArr.push(chat);
                     chatsPanel.append(chat.render());
