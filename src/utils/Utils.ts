@@ -1,4 +1,7 @@
 import Store from "../services/Store";
+import LoginAPI from "../api/LoginAPI";
+import Router from "../services/Router";
+import {ErrorResponse, LoginRequest} from "../type/Types";
 
 export function isObject(value: unknown): value is Record<string, unknown> {
     return typeof value === 'object' && value !== null;
@@ -8,10 +11,11 @@ export function isObject(value: unknown): value is Record<string, unknown> {
 Возвращает строковое значение или пустую строку если свойства у переданного объекта нет.
  */
 export function getProp(key: string, obj: unknown): string {
-    if (!isObject(obj)) {
+    if (!isObject(obj))
         return '';
-    }
     const value = obj[key];
+    if (!value) // на случай если переменная null
+        return '';
     return String(value);
 }
 
@@ -25,6 +29,37 @@ export function getUserName(): string {
     return getProp('display_name', userInfo) ? getProp('display_name', userInfo) :
         getProp('second_name', userInfo) ? getProp('first_name', userInfo) + ' ' + getProp('second_name', userInfo) :
             getProp('second_name', userInfo);
+}
+
+export function loginUser(userInfo: LoginRequest) {
+    LoginAPI.login(userInfo).then(r => {
+        if (r as string === 'OK') {
+            getUserInfo(false);
+        }
+    }).catch((e) => {
+        const error = e as ErrorResponse
+        if (error.response?.reason && error.response.reason === 'User already in system') {
+            getUserInfo(true);
+        }
+        else
+            alert('Проверьте логин или пароль.');
+    });
+}
+
+export async function getUserInfo(needRedirect: boolean) {
+    LoginAPI.getUser().then((u) => {
+        if (!u.id) {
+            Store.removeAuthenticate();
+            Store.removeUser();
+            if (Router._currentRoute?._pathname !== '/')
+                Router.go('/');
+            return;
+        }
+        Store.setAuthenticate();
+        Store.saveUser(JSON.stringify(u));
+        if (needRedirect)
+            Router.go('/messenger');
+    });
 }
 
 // function trim(str: string, rule?: string): string {

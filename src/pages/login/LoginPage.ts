@@ -3,10 +3,9 @@ import Component from "../../services/Component";
 import LoginForm from "../../blocks/login/LoginForm";
 import Button from "../../components/button/Button";
 import Router from "../../services/Router";
-import LoginAPI from "../../api/LoginAPI";
 import {LoginRequest} from "../../type/Types";
 import {checkForm} from "../../utils/Validation";
-import Store from "../../services/Store";
+import {loginUser} from "../../utils/Utils";
 
 export default class LoginPage extends Component {
     render() {
@@ -19,17 +18,7 @@ export default class LoginPage extends Component {
                     const form = event.target as HTMLFormElement;
                     if (checkForm(form)) return; // если есть ошибки валидации, то дальше не продолжаем.
                     const data = Object.fromEntries(new FormData(form));
-                    LoginAPI.login(data as LoginRequest).then(r => {
-                        if (r as string === 'OK') {
-                            Store.setAuthenticate();
-                            LoginAPI.getUser().then((u) => {
-                                Store.saveUser(JSON.stringify(u));
-                                Router.go('/messenger');
-                            });
-                        }
-                    }).catch(() => {
-                        alert('Проверьте логин или пароль.');
-                    });
+                    loginUser(data as LoginRequest);
                 }
             }
         });
