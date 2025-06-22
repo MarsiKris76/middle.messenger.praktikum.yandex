@@ -1,3 +1,6 @@
+import Router from "../services/Router";
+import Store from "../services/Store";
+
 enum METHODS {
     GET = 'GET',
     POST = 'POST',
@@ -8,8 +11,9 @@ enum METHODS {
 enum HTTP_STATUS {
     OK = 200,
     REDIRECTION = 300,
+    BAD_REQUEST = 400,
+    UNAUTHORIZED = 401,
     NOT_FOUND = 404,
-    FORBIDDEN = 403,
     SERVER_ERROR = 500,
 }
 
@@ -93,6 +97,11 @@ export default class HTTPTransport {
                 }
                 if (xhr.status >= HTTP_STATUS.OK && xhr.status < HTTP_STATUS.REDIRECTION) {
                     if (parsedResponse) resolve(parsedResponse);
+                } else if (xhr.status === HTTP_STATUS.UNAUTHORIZED) {
+                    if (parsedResponse) resolve(parsedResponse);
+                    Store.removeAuthenticate();
+                    Store.removeUser();
+                    Router.go('/');
                 } else {
                     reject({
                         status: xhr.status,

@@ -39,7 +39,7 @@ export default class ToolPanel extends Component {
                         if (r as string === 'OK') {
                             Store.removeAuthenticate();
                             Store.removeUser();
-                            Router.go('/')
+                            Router.go('/');
                         }
                     });
                 }

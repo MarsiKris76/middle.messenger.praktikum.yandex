@@ -21,16 +21,13 @@ export default class LoginPage extends Component {
                     const data = Object.fromEntries(new FormData(form));
                     LoginAPI.login(data as LoginRequest).then(r => {
                         if (r as string === 'OK') {
-                            Store.setAuthenticate();
-                            LoginAPI.getUser().then((u) => {
-                                Store.saveUser(JSON.stringify(u));
-                                Router.go('/messenger');
-                            });
+                            getUserInfo();
                         }
                     }).catch((e) => {
                         const error = e as ErrorResponse
-                        if (error.response?.reason && error.response.reason === 'User already in system')
-                            alert('Нужно выйти из приложения чата другой проектной работы для начала работы в этом приложении.')
+                        if (error.response?.reason && error.response.reason === 'User already in system') {
+                            getUserInfo();
+                        }
                         else
                             alert('Проверьте логин или пароль.');
                     });
@@ -57,4 +54,14 @@ export default class LoginPage extends Component {
             },
         });
     }
+}
+
+function getUserInfo() {
+    LoginAPI.getUser().then((u) => {
+        if (!u.id)
+            throw new Error("Ошибка получения данных о пользователе.");
+        Store.setAuthenticate();
+        Store.saveUser(JSON.stringify(u));
+        Router.go('/messenger');
+    });
 }
