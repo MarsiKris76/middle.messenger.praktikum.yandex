@@ -58,7 +58,7 @@ export default class MessengerPage extends Component {
                 click: (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    if (!(event.target instanceof HTMLElement))
+                    if (!(event.target instanceof Element))
                         return;
                     const ec = event.target;
                     const chatItem = ec.closest('.chat-item') as HTMLElement | null;
