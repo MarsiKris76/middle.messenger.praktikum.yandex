@@ -14,7 +14,7 @@ export default class UserItem extends Component {
                 click: (event) => {
                     event.preventDefault();
                     event.stopPropagation();
-                    if (!(event.target instanceof HTMLElement))
+                    if (!(event.target instanceof Element))
                         return;
                     const ec = event.target;
                     const userItem = ec.closest('div[data-user-id]') as HTMLElement | null;
