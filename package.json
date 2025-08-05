@@ -21,6 +21,7 @@
     "cssnano": "^7.0.7",
     "eslint": "^9.25.1",
     "globals": "^16.0.0",
+    "husky": "^9.1.7",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.0.5",
     "postcss": "^8.5.3",
@@ -45,5 +46,10 @@
   },
   "engines": {
     "node": ">=18.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint:all"
+    }
   }
 }
