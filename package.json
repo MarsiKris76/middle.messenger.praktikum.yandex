@@ -4,6 +4,8 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
+    "precommit": "npm-run-all test lint",
+    "prepare": "husky install",
     "dev": "vite",
     "prebuild": "tsc --noEmit",
     "build": "vite build",
@@ -50,7 +52,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all test lint:all",
+      "pre-commit": "npm-run-all test lint",
       "pre-push": "npm run other command"
     }
   }
