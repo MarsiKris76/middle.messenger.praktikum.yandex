@@ -8,4 +8,4 @@
 Для запуска проекта нужно выполнить команду `npm install` и `npm run start` в корне проекта.
 
 ## Применённые технологии
-typescript, eslint, stylelint
+TypeScript, ESLint, Stylelint, Husky, Jest
