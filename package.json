@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "precommit": "npm-run-all test lint",
-    "prepare": "husky install",
+    "prepare": "husky",
     "dev": "vite",
     "prebuild": "tsc --noEmit",
     "build": "vite build",
