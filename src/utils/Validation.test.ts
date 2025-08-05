@@ -18,7 +18,7 @@ describe('Validation', () => {
         });
         test('должен принимать логин из 3-х букв', () => {
             const input = document.createElement('input');
-            input.value = 'mx';
+            input.value = 'x';
             const result = loginValidation({ target: input } as unknown as Event);
             expect(input.classList.contains('input_base--error')).toBe(false);
             expect(result).toBeUndefined();
