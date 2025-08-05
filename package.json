@@ -52,7 +52,7 @@
     "node": ">=18.0"
   },
   "lint-staged": {
-    "**/*.{css,scss}": ["stylelint --fix", "prettier --write"],
-    "**/*.{js,ts}": ["eslint --fix", "prettier --write"]
+    "**/*.{css,scss}": ["stylelint --fix"],
+    "**/*.{js,ts}": ["eslint --fix"]
   }
 }
