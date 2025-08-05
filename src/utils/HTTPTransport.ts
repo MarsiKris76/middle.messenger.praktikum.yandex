@@ -1,7 +1,7 @@
 import Router from "../services/Router";
 import Store from "../services/Store";
 
-enum METHODS {
+export enum METHODS {
     GET = 'GET',
     POST = 'POST',
     PUT = 'PUT',
